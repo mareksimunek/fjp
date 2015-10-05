@@ -11,7 +11,7 @@ Jazyk musí mít minimálně následující konstrukce:
 - cyklus (libovolný)
 - jednoduchou podmínku (if bez else)
 - definice podprogramu (procedura, funkce, metoda)
-- 
+
 Překladač který bude umět tyto základní věci bude hodnocen deseti body. Další body je možné získat na základě rozšíření, každé je za 4 body:
 
 - další typ cyklu (for, do .. while, while .. do, repeat .. unitl)
