@@ -1,5 +1,13 @@
 # Grammar
 
+### Description
+
+- `[x]` - 0 or 1 x
+- `{x}` - 0 or more x
+- `(x | y)` - x or y
+
+### Syntax
+
     Identifier:
         - IDENTIFIER
 
