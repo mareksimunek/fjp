@@ -10,12 +10,9 @@
 
     Identifier:
         - IDENTIFIER
-
-    QualifiedIdentifier:
-        - Identifier { . Identifier }
-
+        
     QualifiedIdentifierList: 
-        - QualifiedIdentifier { , QualifiedIdentifier }
+        - Identifier { , Identifier }
 
 _______________________
 
@@ -41,8 +38,7 @@ _______________________
         class Identifier [TypeParameters]
                                 [extends Type] [implements TypeList] ClassBody
 
-    EnumDeclaration:
-        enum Identifier [implements TypeList] EnumBody
+
 
 ______________________________
 
@@ -51,22 +47,16 @@ ______________________________
         ReferenceType  {[]}
 
     BasicType: 
-        byte, short, char, int, long, float, double, boolean
+        short, char, int, long, float, double, boolean
 
     ReferenceType:
         Identifier [TypeArguments] { . Identifier [TypeArguments] }
 
-    TypeArguments: 
-        < TypeArgument { , TypeArgument } >
-
-    TypeArgument:  
-        ReferenceType
-        ? [ (extends | super) ReferenceType ]
+    
         
 _______________________________
 
-    NonWildcardTypeArguments:
-        < TypeList >
+   
 
     TypeList:  
         ReferenceType { , ReferenceType }
@@ -88,7 +78,7 @@ _______________________________
 _____________________________
 
     Modifier: 
-        public, protected, private, static, abstract, final, native, synchronized, transient, volatile, strictfp
+        static
 
     ElementValue:
         Expression1 
@@ -114,7 +104,6 @@ _____________________________
         MethodOrFieldDecl
         void Identifier VoidMethodDeclaratorRest
         Identifier ConstructorDeclaratorRest
-        GenericMethodOrConstructorDecl
         ClassDeclaration
         
     MethodOrFieldDecl:
@@ -136,12 +125,7 @@ _____________________________
     ConstructorDeclaratorRest:
         FormalParameters [throws QualifiedIdentifierList] Block
 
-    GenericMethodOrConstructorDecl:
-        TypeParameters GenericMethodOrConstructorRest
 
-    GenericMethodOrConstructorRest:
-        (Type | void) Identifier MethodDeclaratorRest
-        Identifier ConstructorDeclaratorRest
 
 _________________________________
 
@@ -426,15 +410,50 @@ ______________________________
         
 ____________________________
 
-    ~~EnumBody:
-        { [EnumConstants] [,] [EnumBodyDeclarations] }
+
+
+# Not included 
+
+
+    BasicType   :
+        byte
+    Modfier :
+      public, protected, private, abstract, final, native, synchronized, transient, volatile, strictfp  
+      
+    TypeArguments: 
+        < TypeArgument { , TypeArgument } >
+
+    TypeArgument:  
+        ReferenceType
+        ? [ (extends | super) ReferenceType ] 
+        
+     NonWildcardTypeArguments:
+        < TypeList >
+      
+    MemberDecl:
+        GenericMethodOrConstructorDecl
+      
+    GenericMethodOrConstructorDecl:
+        TypeParameters GenericMethodOrConstructorRest
+
+    GenericMethodOrConstructorRest:
+        (Type | void) Identifier MethodDeclaratorRest
+        Identifier ConstructorDeclaratorRest
+    EnumDeclaration:
+        enum Identifier [implements TypeList] EnumBody
+
+    QualifiedIdentifier:
+        - Identifier { . Identifier }
+
+    EnumBody: 
+        { [EnumConstants] [,] [EnumBodyDeclarations] }   
     
     EnumConstants:
         EnumConstant
-        EnumConstants , EnumConstant
+        EnumConstants , EnumConstant      
     
     EnumConstant:
         [Annotations] Identifier [Arguments] [ClassBody]
     
     EnumBodyDeclarations:
-        ; {ClassBodyDeclaration}~~
+        ; {ClassBodyDeclaration}
