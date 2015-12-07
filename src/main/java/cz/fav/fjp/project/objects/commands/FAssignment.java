@@ -1,32 +1,72 @@
 package cz.fav.fjp.project.objects.commands;
 
-import cz.fav.fjp.project.objects.ParsableObject;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FAssignment extends ParsableObject {
+import cz.fav.fjp.project.objects.FCommand;
+import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.FVariable;
 
-	private String varType;
-	private String name;
+public class FAssignment extends FCommand {
+
+	private FVariable variable;
+	private FExpression expr;
+	private String operation;
 	
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing expression: " + getWords().toString());
+		System.out.println("Parsing assignment: " + getWords().toString());
+		
+		List<String> toWhere = new ArrayList<String>();
+		FVariable fvar = new FVariable();
+		String operation = "";
+		FExpression fexpr = new FExpression();
+		List<String> what = new ArrayList<String>();
+		int j=0;
+		while (!getWords().get(j).contains("=")) toWhere.add(getWords().get(j++));
+		operation = getWords().get(j++);
+		while (!getWords().get(j).equals(";")) what.add(getWords().get(j++));
+		
+		fexpr.setWords(what);
+		fexpr.parse();
+		
+		if (toWhere.size() == 1) {
+			fvar.setName(toWhere.get(0));
+			this.setExpr(fexpr);
+			this.setVariable(fvar);
+			this.setOperation(operation);
+		}
+		else if (toWhere.size() == 2) { 
+			System.err.println("Weird assingment: " + getWords().toString());
+		}
 		
 	}
-	
-	public String getVarType() {
-		return varType;
+
+	public String getOperation() {
+		return operation;
 	}
 	
-	public String getName() {
-		return name;
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 	
-	public void setVarType(String varType) {
-		this.varType = varType;
+	public FVariable getVariable() {
+		return variable;
+	}
+
+	public void setVariable(FVariable variable) {
+		this.variable = variable;
+	}
+
+	public FExpression getExpr() {
+		return expr;
+	}
+
+	public void setExpr(FExpression expr) {
+		this.expr = expr;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
-	}
+	
+
 	
 }

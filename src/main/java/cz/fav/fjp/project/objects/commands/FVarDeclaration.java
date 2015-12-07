@@ -1,32 +1,27 @@
 package cz.fav.fjp.project.objects.commands;
 
-import cz.fav.fjp.project.objects.ParsableObject;
+import cz.fav.fjp.project.objects.FCommand;
+import cz.fav.fjp.project.objects.FVariable;
 
-public class FVarDeclaration extends ParsableObject {
+public class FVarDeclaration extends FCommand {
 
-	private String varType;
-	private String name;
+	private FVariable var;
 	
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing expression: " + getWords().toString());
+		System.out.println("Parsing variable declaration: " + getWords().toString());
+		this.var = new FVariable();
+		this.var.setType(getWords().get(0));
+		this.var.setName(getWords().get(1));
 		
 	}
 	
-	public String getVarType() {
-		return varType;
+	public void setVar(FVariable var) {
+		this.var = var;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setVarType(String varType) {
-		this.varType = varType;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
+	public FVariable getVar() {
+		return var;
 	}
 	
 }

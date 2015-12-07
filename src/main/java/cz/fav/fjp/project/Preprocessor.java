@@ -46,6 +46,7 @@ public class Preprocessor {
 	public static List<String> removeEmptySpaces(List<String> list) {
 		ArrayList<String> ret = new ArrayList<String>();
 		for (String line : list) {
+			line = line.replace("\t", "");
 			if (line.trim().length() > 0) ret.add(line);
 		}
 		return ret;

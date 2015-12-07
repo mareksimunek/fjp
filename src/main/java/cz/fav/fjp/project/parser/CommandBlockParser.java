@@ -5,8 +5,16 @@ import java.util.List;
 
 import cz.fav.fjp.project.enums.KeyWords;
 import cz.fav.fjp.project.objects.FCommand;
-import cz.fav.fjp.project.objects.commands.FExpression;
+import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.FVariable;
+import cz.fav.fjp.project.objects.commands.FAssignment;
+import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.objects.commands.FIf;
+import cz.fav.fjp.project.objects.commands.FMethodCall;
+import cz.fav.fjp.project.objects.commands.FReturn;
+import cz.fav.fjp.project.objects.commands.FVarDeclaration;
+import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
+import cz.fav.fjp.project.objects.commands.FWhile;
 
 public class CommandBlockParser {
 
@@ -21,9 +29,6 @@ public class CommandBlockParser {
 			i = getSingleCommand(words, nCommand, i);
 			FCommand newCommand = parseSingleCommand(nCommand);
 			ret.add(newCommand);
-			
-			//System.out.println("Ncom: " + nCommand.toString());
-			
 		}
 		return ret;
 	}
@@ -31,30 +36,69 @@ public class CommandBlockParser {
 	public static FCommand parseSingleCommand(List<String> command) throws Exception {
 		int i = 0;
 		
-		System.out.println("Parsing single command: " + command.toString());
+		System.out.println("** Parsing single command: " + command.toString());
 		
-		/*
 		if (command.get(i).equals(KeyWords.kwIf)) {
-			i++;
-			List<String> expr = new ArrayList<String>();
-			FExpression fexpr = new FExpression();
-			i = Processor.getContentInsideBrackets(command, expr, i, "(", ")");
-			fexpr.setWords(expr);
-			fexpr.parse();
+			FIf fif = new FIf();
+			fif.setWords(command);
+			fif.parse();
+			return fif;
+		}
+		else if (command.get(i).equals(KeyWords.kwWhile)) {
+			FWhile fwhile = new FWhile();
+			fwhile.setWords(command);
+			fwhile.parse();
+			return fwhile;
+		}
+		else if (command.get(i).equals(KeyWords.kwFor)) {
+			FFor ffor = new FFor();
+			ffor.setWords(command);
+			ffor.parse();
+			return ffor;
+		}
+		else if (command.get(i).equals(KeyWords.kwReturn)) {
+			FReturn freturn = new FReturn();
+			freturn.setWords(command);
+			freturn.parse();
+			return freturn;
+		}
+		else if (command.size() == 3) {
+				FVarDeclaration decl = new FVarDeclaration();
+				decl.setWords(command);
+				decl.parse();
+				return decl;
+		}
+		else if (command.stream().filter(s -> s.contains("=")).count() == 1) {
+			List<String> toWhere = new ArrayList<String>();
+			int j=0;
+			while (!command.get(j).contains("=")) toWhere.add(command.get(j++));
 			
-			List<String> cmds = new ArrayList<String>();
-			if (!command.get(i).equals(("{"))) {
-				cmds.add(command.get(i));
-				i++;
+			if (toWhere.size() == 1) {
+				FAssignment fassignment = new FAssignment();
+				fassignment.setWords(command);
+				fassignment.parse();
+			}
+			else if (toWhere.size() == 2) { 
+				FVarDeclarationWithInitialization fdecl = new FVarDeclarationWithInitialization();
+				fdecl.setWords(command);
+				fdecl.parse();
 			}
 			else {
-				i = Processor.getContentInsideBrackets(command, cmds, i, "{", "}");
+				System.err.println("Weird assingment: " + command.toString());
 			}
-			FIf foundIf = new FIf();
-			foundIf.setWords(cmds);
-			foundIf.setCondition(fexpr);
+			
+			
+			
 		}
-		*/
+		else if (command.get(command.size() - 2).equals(")")) {
+			FMethodCall fmethodcall = new FMethodCall();
+			fmethodcall.setWords(command);
+			fmethodcall.parse();
+		}
+		else {
+			System.err.println(" * * * * Unrecognized command: " + command.toString());
+		}
+		
 		
 		return null;
 	}
@@ -106,7 +150,7 @@ public class CommandBlockParser {
 		else if (words.get(i).equals(KeyWords.kwFor)) {
 			i++;
 			i = Processor.getContentInsideBrackets(words, list, i, "(", ")");
-			output.add("while");
+			output.add("for");
 			output.add("(");
 			output.addAll(list);
 			output.add(")");
