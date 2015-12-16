@@ -12,6 +12,7 @@ import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.objects.commands.FIf;
 import cz.fav.fjp.project.objects.commands.FMethodCall;
 import cz.fav.fjp.project.objects.commands.FReturn;
+import cz.fav.fjp.project.objects.commands.FSystem;
 import cz.fav.fjp.project.objects.commands.FVarDeclaration;
 import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
 import cz.fav.fjp.project.objects.commands.FWhile;
@@ -61,6 +62,12 @@ public class CommandBlockParser {
 			freturn.setWords(command);
 			freturn.parse();
 			return freturn;
+		}
+        else if (command.get(i).equals(KeyWords.kwSystem)) {
+			FSystem fsystem = new FSystem();
+			fsystem.setWords(command);
+			fsystem.parse();
+			return fsystem;
 		}
 		else if (command.size() == 3) {
 				FVarDeclaration decl = new FVarDeclaration();

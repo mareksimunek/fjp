@@ -15,4 +15,5 @@ public class KeyWords {
 	public static final String kwWhile = "while";
 	public static final String kwFor = "for";
 	public static final String kwReturn = "return";
+    public static final String kwSystem = "System";
 }
