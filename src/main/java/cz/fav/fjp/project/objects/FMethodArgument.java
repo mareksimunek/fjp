@@ -1,12 +1,20 @@
 package cz.fav.fjp.project.objects;
 
-public class FVariable {
-	
+public class FMethodArgument {
+
 	private FVarType type;
 	private String name;
 	
-	public FVariable() {
+	public FMethodArgument() {
 		super();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public FVarType getType() {
@@ -15,14 +23,6 @@ public class FVariable {
 	
 	public void setType(FVarType type) {
 		this.type = type;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 }

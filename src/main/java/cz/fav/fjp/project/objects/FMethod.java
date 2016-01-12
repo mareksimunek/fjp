@@ -8,9 +8,11 @@ import cz.fav.fjp.project.parser.FMethodParser;
 public class FMethod extends ParsableObject {
 	
 	private String name;
-	private List<String> arguments = new ArrayList<String>(); // TODO
+	private List<FMethodArgument> arguments = new ArrayList<FMethodArgument>();
 	private List<String> modifiers;
-	private String returnValueType;
+	private FVarType returnValueType;
+
+	private List<FCommand> commnands;
 	
 	public FMethod() {
 		// TODO Auto-generated constructor stub
@@ -29,14 +31,14 @@ public class FMethod extends ParsableObject {
 		this.name = name;
 	}
 
-	public List<String> getArguments() {
+	public List<FMethodArgument> getArguments() {
 		return arguments;
 	}
 
-	public void setArguments(List<String> arguments) {
+	public void setArguments(List<FMethodArgument> arguments) {
 		this.arguments = arguments;
 	}
-
+	
 	public List<String> getModifiers() {
 		return modifiers;
 	}
@@ -45,12 +47,20 @@ public class FMethod extends ParsableObject {
 		this.modifiers = modifiers;
 	}
 
-	public String getReturnValueType() {
+	public FVarType getReturnValueType() {
 		return returnValueType;
 	}
-
-	public void setReturnValueType(String returnValueType) {
+	
+	public void setReturnValueType(FVarType returnValueType) {
 		this.returnValueType = returnValueType;
+	}
+	
+	public List<FCommand> getCommnands() {
+		return commnands;
+	}
+	
+	public void setCommnands(List<FCommand> commnands) {
+		this.commnands = commnands;
 	}
 
 }

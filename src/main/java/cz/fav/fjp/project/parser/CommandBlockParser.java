@@ -84,11 +84,13 @@ public class CommandBlockParser {
 				FAssignment fassignment = new FAssignment();
 				fassignment.setWords(command);
 				fassignment.parse();
+				return fassignment;
 			}
 			else if (toWhere.size() == 2) { 
 				FVarDeclarationWithInitialization fdecl = new FVarDeclarationWithInitialization();
 				fdecl.setWords(command);
 				fdecl.parse();
+				return fdecl;
 			}
 			else {
 				System.err.println("Weird assingment: " + command.toString());
@@ -101,11 +103,11 @@ public class CommandBlockParser {
 			FMethodCall fmethodcall = new FMethodCall();
 			fmethodcall.setWords(command);
 			fmethodcall.parse();
+			return fmethodcall;
 		}
 		else {
 			System.err.println(" * * * * Unrecognized command: " + command.toString());
 		}
-		
 		
 		return null;
 	}

@@ -8,7 +8,7 @@ public class FAttribute {
 	private List<String> modifiers = new ArrayList<String>();
 	private String name;
 	private String initialValue = null;
-	private String type;
+	private FVarType type;
 	
 	public FAttribute() {
 		super();
@@ -38,11 +38,11 @@ public class FAttribute {
 		this.initialValue = initialValue;
 	}
 
-	public String getType() {
+	public FVarType getType() {
 		return type;
 	}
-
-	public void setType(String type) {
+	
+	public void setType(FVarType type) {
 		this.type = type;
 	}
 	

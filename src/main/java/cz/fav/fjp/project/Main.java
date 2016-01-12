@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import cz.fav.fjp.project.objects.FCompilationUnit;
+import cz.fav.fjp.project.writter.CompilationUnitWritter;
+import cz.fav.fjp.project.writter.WritterSettings;
 
 
 public class Main {
@@ -30,14 +32,20 @@ public class Main {
 			System.out.println(m.getReturnValueType());
 		});
 		*/
+		
+		System.out.println();
+		System.out.println();
+		
+		CompilationUnitWritter wr = new CompilationUnitWritter();
+		wr.transform(unit);
 	}
 	
 	private static List<String> loadFromFile(String[] args) throws IOException {
 
-		//String path = "/home/jpouba/Downloads/PilsProg/DekodovaniPasky.java";
+		String path = "/home/jpouba/Downloads/PilsProg/DekodovaniPasky.java";
         //String path = "C:\\fjp-2\\PilsProg\\DekodovaniPasky.java";
 
-		String path = "D:\\STAZENO\\PilsProg\\PilsProg\\DekodovaniPasky.java";
+		//String path = "D:\\STAZENO\\PilsProg\\PilsProg\\DekodovaniPasky.java";
 
 		return FileUtils.readLines(new File(path));
 	}

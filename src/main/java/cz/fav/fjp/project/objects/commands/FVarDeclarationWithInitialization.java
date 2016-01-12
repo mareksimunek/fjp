@@ -5,6 +5,7 @@ import java.util.List;
 
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.FVarType;
 import cz.fav.fjp.project.objects.FVariable;
 
 public class FVarDeclarationWithInitialization extends FCommand {
@@ -32,7 +33,9 @@ public class FVarDeclarationWithInitialization extends FCommand {
 		if (!operation.equals("=")) throw new Exception("Expected '=' in varriable declaration with inicilialization.");
 		
 		if (toWhere.size() == 2) {
-			fvar.setType(toWhere.get(0));
+			FVarType fVarType = new FVarType();
+			fVarType.setValue(toWhere.get(0));
+			fvar.setType(fVarType);
 			fvar.setName(toWhere.get(1));
 			this.setVariable(fvar);
 			this.setExpression(fexpr);
