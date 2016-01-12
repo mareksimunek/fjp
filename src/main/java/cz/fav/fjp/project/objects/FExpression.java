@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-import cz.fav.fjp.project.parser.InfixToPostfix;
 
 public class FExpression extends ParsableObject {
 
