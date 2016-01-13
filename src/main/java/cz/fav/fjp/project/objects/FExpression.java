@@ -4,99 +4,54 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+import cz.fav.fjp.project.enums.Operators;
+
 
 public class FExpression extends ParsableObject {
 
 	private String returnValueType; 
+	private boolean isLeft;
 
+	List<FExpressionSide> fExpSideList;
+
+
+	/**
+	 * For every INFIX_OPS occurrence split getWords and creates new FExpressionSide
+	 * right side saves the operator 
+	 */
 	@Override
 	public void parse() throws Exception {
 		System.out.println("Parsing expression: " + getWords().toString());
-
-		String word;
-		FObjectInExp obj = null;
-		int tmpIndex;
-		List<FObjectInExp> objectList = new LinkedList<FObjectInExp>();
 		int wordsSize= getWords().size();
+		String word;
+		int lastSplitIndex = 0;
+		FExpressionSide fExpSide;
+		fExpSideList = new LinkedList<FExpressionSide>();
 		for(int i=0; i < wordsSize; i++){
 			word = getWords().get(i);
-			if(word.equalsIgnoreCase("new")){
-				obj = new FObjectInExp(i);
-				setNewFObject(i, wordsSize, obj);
-			}else if(word.equalsIgnoreCase(".")){
-				tmpIndex = i;
-				tmpIndex--;
-				obj = new FObjectInExp(tmpIndex);
-				setCalledFObject(tmpIndex, wordsSize, obj);
-				
+			
+			if(Operators.INFIX_OPS.contains(word)){
+				fExpSide = new FExpressionSide();
+				fExpSide.setWords(getWords().subList(lastSplitIndex, i));
+				if(lastSplitIndex !=0){
+					fExpSide.setOperator(word);
+				}
+				lastSplitIndex = i +1;
+				fExpSideList.add(fExpSide);
 			}
 		}
-		if(obj != null){
-			System.out.println("Object from expression: " +obj.toString());
+		fExpSide = new FExpressionSide();
+		fExpSide.setWords(getWords().subList(lastSplitIndex, wordsSize));
+		fExpSideList.add(fExpSide);
+		
+		for(FExpressionSide f : fExpSideList){
+			f.parse();
 		}
 		
-
+		
 	}
 
-	void setNewFObject(int index, int size, FObjectInExp obj){
-		String word;
-		index++;
-		if(index < 0)return;
-		obj.setName(getWords().get(index));
-		index++;
-		int openBraces = 0;
 
-		while(index< size){
-			word = getWords().get(index);
-			if(word.equalsIgnoreCase("(")){
-				openBraces++;
-			}else if(word.equalsIgnoreCase(")")){
-				openBraces--;
-				if(openBraces == 0){
-					obj.setEndIndex(index);
-					break;
-				}
-			}else if(word.equalsIgnoreCase(",")){
-			}else{
-				obj.addParam(word);
-			}
-			index++;
-
-		}
-		if(obj.getEndIndex() ==0){
-			obj.setEndIndex(index-1);
-		}
-	}
-	void setCalledFObject(int index, int size, FObjectInExp obj){
-		String word;
-		if(index < 0)return;
-		obj.setName(getWords().get(index));
-		index += 2;
-		int openBraces = 0;
-		if(index >= size)return;
-		obj.setMethodName(getWords().get(index));
-
-		while(index< size){
-			word = getWords().get(index);
-			if(word.equalsIgnoreCase("(")){
-				openBraces++;
-			}else if(word.equalsIgnoreCase(")")){
-				openBraces--;
-				if(openBraces == 0){
-					obj.setEndIndex(index);
-					break;
-				}
-			}else if(word.equalsIgnoreCase(",")){
-			}else{
-				obj.addParam(word);
-			}
-			index++;
-
-		}
-		if(obj.getEndIndex() ==0){
-			obj.setEndIndex(index-1);
-		}
-	}
 
 
 	public String getReturnValueType() {
@@ -105,6 +60,15 @@ public class FExpression extends ParsableObject {
 
 	public void setReturnValueType(String returnValueType) {
 		this.returnValueType = returnValueType;
+	}
+
+
+	public boolean isLeft() {
+		return isLeft;
+	}
+
+	public void setLeft(boolean isLeft) {
+		this.isLeft = isLeft;
 	}
 
 }
