@@ -1,20 +1,29 @@
 package cz.fav.fjp.project.objects.commands;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import cz.fav.fjp.project.objects.FCommand;
-import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.objects.*;
 import cz.fav.fjp.project.parser.CommandBlockParser;
 import cz.fav.fjp.project.parser.Processor;
 
-public class FFor extends FCommand {
+public class FFor extends FCommand implements ParentClass, ObjectWithLocalVars {
 
 	private FExpression condition;
 	private FCommand decl;
 	private FCommand increment;
 	private List<FCommand> commands = new ArrayList<FCommand>();
-	
+	private Map<String, FVarType> variablesTable = new HashMap<>();
+
+	private ParentClass parent;
+
+	public FFor(ParentClass parent) {
+		this.parent = parent;
+	}
+
 	@Override
 	public void parse() throws Exception {
 		System.out.println("Parsing for.");
@@ -33,7 +42,7 @@ public class FFor extends FCommand {
 		}
 		winit.add(";");
 		j++;
-		this.setDecl(CommandBlockParser.parseSingleCommand(winit));
+		this.setDecl(CommandBlockParser.parseSingleCommand(winit, this));
 		
 		List<String> wcond = new ArrayList<String>();
 		while (!inBrackets.get(j).equals(";")) {
@@ -41,7 +50,7 @@ public class FFor extends FCommand {
 			j++;
 		}
 		j++;
-		this.condition = new FExpression();
+		this.condition = new FExpression(this);
 		this.condition.setWords(wcond);
 		this.condition.parse();
 		
@@ -52,16 +61,16 @@ public class FFor extends FCommand {
 		}
 		wincr.add(";");
 		j++;
-		this.increment = CommandBlockParser.parseSingleCommand(wincr);
+		this.increment = CommandBlockParser.parseSingleCommand(wincr, this);
 		
 		List<String> cmds = new ArrayList<String>();
 		if (!getWords().get(i).equals(("{"))) {
 			CommandBlockParser.getSingleCommand(getWords(), cmds, i);
-			FCommand singleCmd = CommandBlockParser.parseSingleCommand(cmds);
+			FCommand singleCmd = CommandBlockParser.parseSingleCommand(cmds, this);
 			fcmds.add(singleCmd);
 		} else {
 			i = Processor.getContentInsideBrackets(getWords(), cmds, i, "{", "}");
-			fcmds.addAll(CommandBlockParser.parseBlock(cmds));
+			fcmds.addAll(CommandBlockParser.parseBlock(cmds, this));
 		}
 		
 	}
@@ -97,5 +106,21 @@ public class FFor extends FCommand {
 	public void setCommands(List<FCommand> commands) {
 		this.commands = commands;
 	}
-	
+
+	public ParentClass getParent() {
+		return parent;
+	}
+
+	@Override
+	public boolean addVarToTable(FVariable variable) {
+		boolean result = Utils.addVarToTable(this.variablesTable, variable);
+		System.out.println("For: Iterating through variables table:");
+		for ( Map.Entry<String, FVarType> entry : this.variablesTable.entrySet() ) {
+			String key = entry.getKey();
+			FVarType value = entry.getValue();
+			System.out.println(value.getValue() + " " + key);
+		}
+		System.out.println("");
+		return result;
+	}
 }

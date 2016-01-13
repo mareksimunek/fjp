@@ -1,7 +1,7 @@
 package cz.fav.fjp.project.writter;
 
 import cz.fav.fjp.project.objects.FMethod;
-import cz.fav.fjp.project.objects.FMethodArgument;
+import cz.fav.fjp.project.objects.FVariable;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.objects.commands.FMethodCall;
 import cz.fav.fjp.project.objects.commands.FReturn;
@@ -17,22 +17,22 @@ public class MethodWritter extends DefaultWritter<FMethod> {
 		log("Writing method: " + obj.getName(), 1);
 		
 		log("Args:", 2);
-		obj.getArguments().forEach( ma -> {
-			log(ma.getType().getValue() + " " + ma.getName(), 2);
+		obj.getArguments().forEach( variable1 -> {
+			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
 		});
 		
 		new VarTypeWritter().transform(obj.getReturnValueType());
 		write(" " + obj.getName() + "(");
 
 		for (int i = 0; i < obj.getArguments().size()-1; i++) {
-			FMethodArgument ma = obj.getArguments().get(i);
-			new VarTypeWritter().transform(ma.getType());
-			write(" " + ma.getName() + ",");
+			FVariable variable = obj.getArguments().get(i);
+			new VarTypeWritter().transform(variable.getType());
+			write(" " + variable.getName() + ",");
 		}
 		if (obj.getArguments().size() > 0) {
-			FMethodArgument ma = obj.getArguments().get(obj.getArguments().size()-1);
-			new VarTypeWritter().transform(ma.getType());
-			write(" " + ma.getName());
+			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);
+			new VarTypeWritter().transform(variable.getType());
+			write(" " + variable.getName());
 		}
 		writeln(") {");
 		

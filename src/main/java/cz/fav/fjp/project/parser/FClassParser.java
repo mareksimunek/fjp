@@ -3,11 +3,7 @@ package cz.fav.fjp.project.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.fav.fjp.project.objects.FAttribute;
-import cz.fav.fjp.project.objects.FClass;
-import cz.fav.fjp.project.objects.FMethod;
-import cz.fav.fjp.project.objects.FMethodArgument;
-import cz.fav.fjp.project.objects.FVarType;
+import cz.fav.fjp.project.objects.*;
 
 public class FClassParser {
 
@@ -36,13 +32,13 @@ public class FClassParser {
 				List<String> methodBody = new ArrayList<String>();
 				i = Processor.getContentInsideBrackets(words, arguments, i, "(", ")");
 				i = Processor.getContentInsideBrackets(words, methodBody, i, "{", "}");
-				FMethod method = new FMethod();
+				FMethod method = new FMethod(classToParse);
 				method.setName(name);
 				FVarType rv = new FVarType();
 				rv.setValue(returnType);
 				method.setReturnValueType(rv);
 				method.setModifiers(modifiers);
-				method.setArguments(parseArgs(arguments));
+				method.setArguments(parseArgs(arguments, method));
 				method.setWords(methodBody);
 				method.parse();
 				classToParse.getMethods().add(method);
@@ -52,21 +48,25 @@ public class FClassParser {
 				i++;
 				initValue = words.get(i);
 				i++;
-				FAttribute attr = new FAttribute();
+				FAttribute attr = new FAttribute(classToParse);
 				attr.setInitialValue(initValue);
-				attr.setName(name);
+				FVariable variable = new FVariable(classToParse);
+				variable.setName(name);
 				FVarType type = new FVarType();
 				type.setValue(returnType);
-				attr.setType(type);
+				variable.setType(type);
+				attr.setVariable(variable);
 				attr.setModifiers(modifiers);
 				classToParse.getAttributes().add(attr);
 			}
 			else if (words.get(i).equals(";")) {
-				FAttribute attr = new FAttribute();
-				attr.setName(name);
+				FAttribute attr = new FAttribute(classToParse);
+				FVariable variable = new FVariable(classToParse);
+				variable.setName(name);
 				FVarType type = new FVarType();
 				type.setValue(returnType);
-				attr.setType(type);
+				variable.setType(type);
+				attr.setVariable(variable);
 				attr.setModifiers(modifiers);
 				classToParse.getAttributes().add(attr);
 			}
@@ -75,23 +75,23 @@ public class FClassParser {
 		}
 	}
 	
-	private static List<FMethodArgument> parseArgs(List<String> args) {
-		List<FMethodArgument> ret = new ArrayList<FMethodArgument>();
+	private static List<FVariable> parseArgs(List<String> args, ParentClass parent) {
+		List<FVariable> ret = new ArrayList<FVariable>();
 		int i=0;
 		while (i < args.size()) {
-			FMethodArgument ma = new FMethodArgument();
+			FVariable variable = new FVariable(parent);
 			String type = args.get(i);
 			i++;
 			if (args.get(i).equals("[")) {
 				type += "[]";
 				i +=2;
 			}
+			variable.setName(args.get(i));
 			FVarType vt = new FVarType();
 			vt.setValue(type);
-			ma.setType(vt);
-			ma.setName(args.get(i));
+			variable.setType(vt);
 			i++;
-			ret.add(ma);
+			ret.add(variable);
 		}
 		return ret;
 	}

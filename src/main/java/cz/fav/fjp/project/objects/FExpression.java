@@ -2,7 +2,6 @@ package cz.fav.fjp.project.objects;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 import cz.fav.fjp.project.enums.Operators;
 
@@ -11,9 +10,13 @@ public class FExpression extends ParsableObject {
 
 	private String returnValueType; 
 	private boolean isLeft;
+	private ParentClass parent;
 
 	List<FExpressionSide> fExpSideList;
 
+	public FExpression(ParentClass parent) {
+		this.parent = parent;
+	}
 
 	/**
 	 * For every INFIX_OPS occurrence split getWords and creates new FExpressionSide
@@ -71,4 +74,7 @@ public class FExpression extends ParsableObject {
 		this.isLeft = isLeft;
 	}
 
+	public ParentClass getParent() {
+		return parent;
+	}
 }

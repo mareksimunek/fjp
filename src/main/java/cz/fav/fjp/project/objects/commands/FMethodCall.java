@@ -6,13 +6,20 @@ import java.util.List;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.FVariable;
+import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.parser.Processor;
 
-public class FMethodCall extends FCommand {
+public class FMethodCall extends FCommand implements ParentClass {
 
 	private String methodName;
 	private List<String> args;
-	
+
+	private ParentClass parent;
+
+	public FMethodCall(ParentClass parent) {
+		this.parent = parent;
+	}
+
 	@Override
 	public void parse() throws Exception {
 		System.out.println("Parsing mehod call: " + getWords().toString());
@@ -46,8 +53,10 @@ public class FMethodCall extends FCommand {
 	public List<String> getArgs() {
 		return args;
 	}
-	
 
+	public ParentClass getParent() {
+		return parent;
+	}
 	
 
 	

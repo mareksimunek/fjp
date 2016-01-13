@@ -7,6 +7,7 @@ import cz.fav.fjp.project.enums.KeyWords;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.FVariable;
+import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.objects.commands.FIf;
@@ -19,7 +20,7 @@ import cz.fav.fjp.project.objects.commands.FWhile;
 
 public class CommandBlockParser {
 
-	public static List<FCommand> parseBlock(List<String> words) throws Exception {
+	public static List<FCommand> parseBlock(List<String> words, ParentClass parent) throws Exception {
 		ArrayList<FCommand> ret = new ArrayList<FCommand>();
 		
 		int i=0;
@@ -28,49 +29,49 @@ public class CommandBlockParser {
 			
 			List<String> nCommand = new ArrayList<String>();
 			i = getSingleCommand(words, nCommand, i);
-			FCommand newCommand = parseSingleCommand(nCommand);
+			FCommand newCommand = parseSingleCommand(nCommand, parent);
 			ret.add(newCommand);
 		}
 		return ret;
 	}
 
-	public static FCommand parseSingleCommand(List<String> command) throws Exception {
+	public static FCommand parseSingleCommand(List<String> command, ParentClass parent) throws Exception {
 		int i = 0;
 		
 		System.out.println("** Parsing single command: " + command.toString());
 		
 		if (command.get(i).equals(KeyWords.kwIf)) {
-			FIf fif = new FIf();
+			FIf fif = new FIf(parent);
 			fif.setWords(command);
 			fif.parse();
 			return fif;
 		}
 		else if (command.get(i).equals(KeyWords.kwWhile)) {
-			FWhile fwhile = new FWhile();
+			FWhile fwhile = new FWhile(parent);
 			fwhile.setWords(command);
 			fwhile.parse();
 			return fwhile;
 		}
 		else if (command.get(i).equals(KeyWords.kwFor)) {
-			FFor ffor = new FFor();
+			FFor ffor = new FFor(parent);
 			ffor.setWords(command);
 			ffor.parse();
 			return ffor;
 		}
 		else if (command.get(i).equals(KeyWords.kwReturn)) {
-			FReturn freturn = new FReturn();
+			FReturn freturn = new FReturn(parent);
 			freturn.setWords(command);
 			freturn.parse();
 			return freturn;
 		}
         else if (command.get(i).equals(KeyWords.kwSystem)) {
-			FSystem fsystem = new FSystem();
+			FSystem fsystem = new FSystem(parent);
 			fsystem.setWords(command);
 			fsystem.parse();
 			return fsystem;
 		}
 		else if (command.size() == 3) {
-				FVarDeclaration decl = new FVarDeclaration();
+				FVarDeclaration decl = new FVarDeclaration(parent);
 				decl.setWords(command);
 				decl.parse();
 				return decl;
@@ -81,13 +82,13 @@ public class CommandBlockParser {
 			while (!command.get(j).contains("=")) toWhere.add(command.get(j++));
 			
 			if (toWhere.size() == 1) {
-				FAssignment fassignment = new FAssignment();
+				FAssignment fassignment = new FAssignment(parent);
 				fassignment.setWords(command);
 				fassignment.parse();
 				return fassignment;
 			}
 			else if (toWhere.size() == 2) { 
-				FVarDeclarationWithInitialization fdecl = new FVarDeclarationWithInitialization();
+				FVarDeclarationWithInitialization fdecl = new FVarDeclarationWithInitialization(parent);
 				fdecl.setWords(command);
 				fdecl.parse();
 				return fdecl;
@@ -100,7 +101,7 @@ public class CommandBlockParser {
 			
 		}
 		else if (command.get(command.size() - 2).equals(")")) {
-			FMethodCall fmethodcall = new FMethodCall();
+			FMethodCall fmethodcall = new FMethodCall(parent);
 			fmethodcall.setWords(command);
 			fmethodcall.parse();
 			return fmethodcall;

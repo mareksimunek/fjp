@@ -2,3 +2,5 @@
 .project
 .classpath
 .settings/
+.idea/*
+cz.fav.fjp.project.iml

@@ -15,7 +15,7 @@ public class FMethodParser {
 		
 		Utils.prettyPrint(words);
 		
-		List<FCommand> commandList = CommandBlockParser.parseBlock(words);
+		List<FCommand> commandList = CommandBlockParser.parseBlock(words, methodToParse);
 		methodToParse.setCommnands(commandList);
 	}
 	

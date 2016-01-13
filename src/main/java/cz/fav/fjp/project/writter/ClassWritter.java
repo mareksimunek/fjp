@@ -15,9 +15,9 @@ public class ClassWritter extends DefaultWritter<FClass> {
 				if (s.equals("static")) write("static ");
 			});
 			
-			new VarTypeWritter().transform(a.getType());
+			new VarTypeWritter().transform(a.getVariable().getType());
 			write(" ");
-			write(a.getName() + " ");
+			write(a.getVariable().getName() + " ");
 			if (a.getInitialValue() != null) write(" = " + a.getInitialValue());
 			writeln(";");
 		});

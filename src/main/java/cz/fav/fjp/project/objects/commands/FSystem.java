@@ -5,10 +5,17 @@ import java.util.List;
 
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.ParentClass;
 
-public class FSystem extends FCommand {
+public class FSystem extends FCommand implements ParentClass {
 
 	private FExpression returnValue;
+
+	private ParentClass parent;
+
+	public FSystem(ParentClass parent) {
+		this.parent = parent;
+	}
 
 	@Override
 	public void parse() throws Exception {
@@ -25,7 +32,7 @@ public class FSystem extends FCommand {
 		expr.remove(0);
 		expr.remove(expr.size()-1);
 
-		this.returnValue = new FExpression();
+		this.returnValue = new FExpression(this);
 		this.returnValue.setWords(expr);
 		this.returnValue.parse();
 	}
@@ -36,6 +43,10 @@ public class FSystem extends FCommand {
 
 	public FExpression getReturnValue() {
 		return returnValue;
+	}
+
+	public ParentClass getParent() {
+		return parent;
 	}
 
 }

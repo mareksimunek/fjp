@@ -6,12 +6,13 @@ import java.util.List;
 public class FAttribute {
 
 	private List<String> modifiers = new ArrayList<String>();
-	private String name;
+	private FVariable variable;
 	private String initialValue = null;
-	private FVarType type;
-	
-	public FAttribute() {
-		super();
+
+	ParentClass parent;
+
+	public FAttribute(ParentClass parent) {
+		this.parent = parent;
 	}
 
 	public List<String> getModifiers() {
@@ -22,12 +23,12 @@ public class FAttribute {
 		this.modifiers = modifiers;
 	}
 
-	public String getName() {
-		return name;
+	public FVariable getVariable() {
+		return variable;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setVariable(FVariable variable) {
+		this.variable = variable;
 	}
 
 	public String getInitialValue() {
@@ -38,12 +39,8 @@ public class FAttribute {
 		this.initialValue = initialValue;
 	}
 
-	public FVarType getType() {
-		return type;
-	}
-	
-	public void setType(FVarType type) {
-		this.type = type;
+	public ParentClass getParent() {
+		return parent;
 	}
 	
 }

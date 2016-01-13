@@ -5,21 +5,28 @@ import java.util.List;
 
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.parser.CommandBlockParser;
 import cz.fav.fjp.project.parser.Processor;
 
-public class FIf extends FCommand {
+public class FIf extends FCommand implements ParentClass {
 
 	private FExpression condition;
 	private List<FCommand> commands = new ArrayList<FCommand>();
 	private List<FCommand> elseCommands = new ArrayList<FCommand>();
+
+	private ParentClass parent;
+
+	public FIf(ParentClass parent) {
+		this.parent = parent;
+	}
 
 	@Override
 	public void parse() throws Exception {
 		System.out.println("Parsing if.");
 		
 		int i = 1;
-		FExpression fexpr = new FExpression();
+		FExpression fexpr = new FExpression(this);
 		List<FCommand> fcmds = new ArrayList<FCommand>();
 
 		List<String> expr = new ArrayList<String>();
@@ -30,11 +37,11 @@ public class FIf extends FCommand {
 		List<String> cmds = new ArrayList<String>();
 		if (!getWords().get(i).equals(("{"))) {
 			CommandBlockParser.getSingleCommand(getWords(), cmds, i);
-			FCommand singleCmd = CommandBlockParser.parseSingleCommand(cmds);
+			FCommand singleCmd = CommandBlockParser.parseSingleCommand(cmds, this);
 			fcmds.add(singleCmd);
 		} else {
 			i = Processor.getContentInsideBrackets(getWords(), cmds, i, "{", "}");
-			fcmds.addAll(CommandBlockParser.parseBlock(cmds));
+			fcmds.addAll(CommandBlockParser.parseBlock(cmds, this));
 		}
 
 		this.setCondition(fexpr);
@@ -64,5 +71,9 @@ public class FIf extends FCommand {
 
 	public void setElseCommands(List<FCommand> elseCommands) {
 		this.elseCommands = elseCommands;
+	}
+
+	public ParentClass getParent() {
+		return parent;
 	}
 }

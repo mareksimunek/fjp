@@ -20,9 +20,9 @@ public class FExpressionSide extends ParsableObject {
 		String word;
 		FObjectInExp obj = null;
 		boolean a;
-		while( a = ((obj.getName() + "a").equals("gha") == true) == true){
+		/*while( a = ((obj.getName() + "a").equals("gha") == true) == true){
 			;
-		}
+		}*/
 		List<FObjectInExp> objectList = new LinkedList<FObjectInExp>();
 		if(getWords().get(0).equalsIgnoreCase("(")){
 			obj = new FObjectInExp();

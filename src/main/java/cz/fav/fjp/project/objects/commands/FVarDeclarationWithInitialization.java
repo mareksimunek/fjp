@@ -3,24 +3,27 @@ package cz.fav.fjp.project.objects.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.fav.fjp.project.objects.FCommand;
-import cz.fav.fjp.project.objects.FExpression;
-import cz.fav.fjp.project.objects.FVarType;
-import cz.fav.fjp.project.objects.FVariable;
+import cz.fav.fjp.project.objects.*;
 
-public class FVarDeclarationWithInitialization extends FCommand {
+public class FVarDeclarationWithInitialization extends FCommand implements ParentClass {
 
 	private FVariable variable;
 	private FExpression expression;
-	
+
+	private ParentClass parent;
+
+	public FVarDeclarationWithInitialization(ParentClass parent) {
+		this.parent = parent;
+	}
+
 	@Override
 	public void parse() throws Exception {
 		System.out.println("Parsing variable declararion with init: " + getWords().toString());
 		
 		List<String> toWhere = new ArrayList<String>();
-		FVariable fvar = new FVariable();
+		FVariable fvar = new FVariable(this);
 		String operation = "";
-		FExpression fexpr = new FExpression();
+		FExpression fexpr = new FExpression(this);
 		List<String> what = new ArrayList<String>();
 		int j=0;
 		while (!getWords().get(j).contains("=")) toWhere.add(getWords().get(j++));
@@ -35,8 +38,8 @@ public class FVarDeclarationWithInitialization extends FCommand {
 		if (toWhere.size() == 2) {
 			FVarType fVarType = new FVarType();
 			fVarType.setValue(toWhere.get(0));
-			fvar.setType(fVarType);
 			fvar.setName(toWhere.get(1));
+			fvar.setType(fVarType);
 			this.setVariable(fvar);
 			this.setExpression(fexpr);
 		}
@@ -60,6 +63,10 @@ public class FVarDeclarationWithInitialization extends FCommand {
 	
 	public FExpression getExpression() {
 		return expression;
+	}
+
+	public ParentClass getParent() {
+		return parent;
 	}
 	
 }
