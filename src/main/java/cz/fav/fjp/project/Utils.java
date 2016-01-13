@@ -2,6 +2,8 @@ package cz.fav.fjp.project;
 
 import cz.fav.fjp.project.objects.FVarType;
 import cz.fav.fjp.project.objects.FVariable;
+import cz.fav.fjp.project.objects.ObjectWithLocalVars;
+import cz.fav.fjp.project.objects.ParentClass;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,23 @@ public class Utils {
 		}
 		// otherwise an error will be thrown
 		return false;
+	}
+
+	public static String getVarType(String name, ParentClass parentClass) throws Exception
+	{
+		while ((parentClass = parentClass.getParent()) != null)
+		{
+			if (parentClass instanceof ObjectWithLocalVars)
+			{
+				Map<String, FVarType> variablesTable = ((ObjectWithLocalVars) parentClass).getVariablesTable();
+				FVarType varType = variablesTable.get(name);
+				if (varType != null)
+				{
+					return varType.getValue();
+				}
+			}
+		}
+		throw new Exception("No such variable exists!");
 	}
 	
 }
