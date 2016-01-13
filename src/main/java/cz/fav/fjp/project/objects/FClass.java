@@ -49,6 +49,10 @@ public class FClass extends ParsableObject implements ParentClass, ObjectWithLoc
 		this.methods = methods;
 	}
 
+	public Map<String, FVarType> getVariablesTable() {
+		return variablesTable;
+	}
+
 	@Override
 	public boolean addVarToTable(FVariable variable)
 	{

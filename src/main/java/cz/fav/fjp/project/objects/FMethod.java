@@ -57,7 +57,12 @@ public class FMethod extends ParsableObject implements ParentClass, ObjectWithLo
 	public void setReturnValueType(FVarType returnValueType) {
 		this.returnValueType = returnValueType;
 	}
-	
+
+	@Override
+	public Map<String, FVarType> getVariablesTable() {
+		return variablesTable;
+	}
+
 	public List<FCommand> getCommnands() {
 		return commnands;
 	}

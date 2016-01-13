@@ -107,6 +107,11 @@ public class FFor extends FCommand implements ParentClass, ObjectWithLocalVars {
 		this.commands = commands;
 	}
 
+	@Override
+	public Map<String, FVarType> getVariablesTable() {
+		return variablesTable;
+	}
+
 	public ParentClass getParent() {
 		return parent;
 	}
