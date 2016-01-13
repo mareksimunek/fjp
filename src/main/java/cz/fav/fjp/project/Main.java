@@ -43,9 +43,9 @@ public class Main {
 	private static List<String> loadFromFile(String[] args) throws IOException {
 
 		//String path = "/home/jpouba/Downloads/PilsProg/DekodovaniPasky.java";
-        String path = "C:\\fjp-2\\PilsProg\\DekodovaniPasky.java";
+        //String path = "C:\\fjp-2\\PilsProg\\DekodovaniPasky.java";
 
-		//String path = "D:\\STAZENO\\PilsProg\\PilsProg\\DekodovaniPasky.java";
+		String path = "D:\\STAZENO\\PilsProg\\PilsProg\\DekodovaniPasky.java";
 
 		return FileUtils.readLines(new File(path));
 	}

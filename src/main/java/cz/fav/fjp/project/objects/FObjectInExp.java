@@ -3,12 +3,12 @@ package cz.fav.fjp.project.objects;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FObjectInExp {
+public class FObjectInExp extends ParsableObject implements ParentClass{
 	
 	String name;
 	List<String> params;
 	private String methodName;
-
+	private ParentClass parent;
 	
 	public FObjectInExp(String name,
 			List<String> params) {
@@ -17,8 +17,9 @@ public class FObjectInExp {
 		this.params = params;
 	}
 	
-	public FObjectInExp() {
+	public FObjectInExp(ParentClass parent) {
 		super();
+		this.parent = parent;
 		this.params = new LinkedList<String>();
 	}
 	public String getName() {
@@ -50,6 +51,16 @@ public class FObjectInExp {
 	public String toString() {
 		return "FObjectInExp [name=" + name + ", params=" + params
 				+ ", methodName=" + methodName + "]";
+	}
+
+	@Override
+	public void parse() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ParentClass getParent() {
+		return parent;
 	}
 
 

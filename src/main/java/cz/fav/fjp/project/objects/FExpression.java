@@ -6,7 +6,7 @@ import java.util.List;
 import cz.fav.fjp.project.enums.Operators;
 
 
-public class FExpression extends ParsableObject {
+public class FExpression extends ParsableObject implements ParentClass {
 
 	private String returnValueType; 
 	private boolean isLeft;
@@ -34,7 +34,7 @@ public class FExpression extends ParsableObject {
 			word = getWords().get(i);
 			
 			if(Operators.INFIX_OPS.contains(word)){
-				fExpSide = new FExpressionSide();
+				fExpSide = new FExpressionSide(this);
 				fExpSide.setWords(getWords().subList(lastSplitIndex, i));
 				if(lastSplitIndex !=0){
 					fExpSide.setOperator(word);
@@ -43,7 +43,7 @@ public class FExpression extends ParsableObject {
 				fExpSideList.add(fExpSide);
 			}
 		}
-		fExpSide = new FExpressionSide();
+		fExpSide = new FExpressionSide(this);
 		fExpSide.setWords(getWords().subList(lastSplitIndex, wordsSize));
 		fExpSideList.add(fExpSide);
 		
