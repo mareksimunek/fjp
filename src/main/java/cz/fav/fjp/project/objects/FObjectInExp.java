@@ -24,6 +24,16 @@ public class FObjectInExp extends ParsableObject implements ParentClass{
 	public List<String> getParams() {
 		return params;
 	}
+	public String getParamsString()
+	{
+		String params = "";
+		for (int i = 0; i < getParams().size(); i++)
+		{
+			params += getParams().get(i) + ", ";
+		}
+		params = params.substring(0, params.length() - 2);
+		return params;
+	}
 	public void addParam (String param){
 		params.add(param);
 	}

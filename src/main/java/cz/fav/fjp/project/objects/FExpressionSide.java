@@ -129,6 +129,23 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 		index--;
 		if(index < 0)return;
 		obj.setName(getWords().get(index));
+
+		if (obj.getName().equals(")"))
+		{
+			ParentClass parentClass = this.getObjectList().get(this.getObjectList().size() - 1);
+			if (parentClass instanceof FExpressionSide)
+			{
+				if (((FExpressionSide)parentClass).getObjectList().size() > 0)
+				{
+					ParentClass assignement = ((FExpressionSide)parentClass).getObjectList().get(0);
+					if (assignement instanceof FAssignment)
+					{
+						obj.setName(((FAssignment) assignement).getVariable().getName());
+					}
+				}
+			}
+		}
+
 		index += 2;
 		int openBraces = 0;
 		if(index >= size)return;

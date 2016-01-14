@@ -22,6 +22,12 @@ public class ObjectInExpWritter extends DefaultWritter<FObjectInExp> {
             case "Scanner":
                 write("readLine()");
                 break;
+            case "String":
+                String method = obj.getMethodName();
+                if (method.equals("charAt"))
+                {
+                    write(obj.getName() + "[" + obj.getParamsString() + "]");
+                }
             default:
                 write("Unknown class " + typeName + "!!!");
         }
