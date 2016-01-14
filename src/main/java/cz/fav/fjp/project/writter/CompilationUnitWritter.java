@@ -18,8 +18,9 @@ public class CompilationUnitWritter extends DefaultWritter<FCompilationUnit> {
 		writeln();
 		writeln("#define STR_LEN 256");
 		writeln();
+		writeln("char str[STR_LEN];");
+		writeln();
 		writeln("char* readLine() {");
-		writeln("  char str[STR_LEN];");
 		writeln("  fgets(str, STR_LEN, stdin);");
 		writeln("  str[strlen(str) - 1] = '\\0';");
 		writeln("  return str;");

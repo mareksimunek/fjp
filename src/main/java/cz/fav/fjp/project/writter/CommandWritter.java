@@ -23,6 +23,8 @@ import cz.fav.fjp.project.writter.commands.WhileWritter;
 
 public class CommandWritter extends DefaultWritter<FCommand> {
 
+	private boolean writeSemicolons = true;
+	
 	@Override
 	public void transform(FCommand obj) {
 		
@@ -38,5 +40,20 @@ public class CommandWritter extends DefaultWritter<FCommand> {
 		else if (obj instanceof FSystem) new SystemWritter().transform((FSystem) obj);
 		else if (obj instanceof FAssignment) new AssignmentWritter().transform((FAssignment) obj);
 		else writeln("**** unhandled command: " + obj.getClass().getName());
+		
+		if (!writeSemicolons) return;
+		
+		if (obj instanceof FVarDeclaration) write(";");
+		if (obj instanceof FVarDeclarationWithInitialization) write(";");
+		if (obj instanceof FReturn) write(";");
+		if (obj instanceof FMethodCall) write(";");
+		if (obj instanceof FAssignment) write(";");
+		if (obj instanceof FSystem) write(";");
+
+	}
+	
+	public CommandWritter writeSemicolons(boolean writeSemicolons) {
+		this.writeSemicolons = writeSemicolons;
+		return this;
 	}
 }

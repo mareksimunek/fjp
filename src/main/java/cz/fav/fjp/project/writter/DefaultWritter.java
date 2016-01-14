@@ -3,6 +3,7 @@ package cz.fav.fjp.project.writter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import cz.fav.fjp.project.StringTable;
 import cz.fav.fjp.project.objects.ParsableObject;
 
 public abstract class DefaultWritter<T> {
@@ -19,7 +20,11 @@ public abstract class DefaultWritter<T> {
 	
 	protected void write(String s) {
 		try {
-			this.writter.write(s);
+			String res = new String(s);
+			for (String code: StringTable.codeToString.keySet()) {
+				res = res.replace(code, StringTable.getString(code));
+			}
+			this.writter.write(res);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

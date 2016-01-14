@@ -14,12 +14,12 @@ public class ForWritter extends DefaultWritter<FFor> {
 		log("Writing for:", 3);
 		
 		write("for ( ");
-		new CommandWritter().transform(obj.getDecl());
+		new CommandWritter().writeSemicolons(false).transform(obj.getDecl());
 		// TODO when to write?
 		//write(" ; ");
 		new ExpressionWritter().transform(obj.getCondition());
 		write(" ; ");
-		new CommandWritter().transform(obj.getIncrement());
+		new CommandWritter().writeSemicolons(false).transform(obj.getIncrement());
 		writeln(" ) { ");
 		
 		obj.getCommands().forEach( c -> {

@@ -38,6 +38,8 @@ public class Main {
 		
 		CompilationUnitWritter wr = new CompilationUnitWritter();
 		wr.transform(unit);
+		
+		
 	}
 	
 	private static List<String> loadFromFile(String[] args) throws IOException {

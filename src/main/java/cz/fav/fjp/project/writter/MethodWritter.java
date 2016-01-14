@@ -27,11 +27,13 @@ public class MethodWritter extends DefaultWritter<FMethod> {
 		for (int i = 0; i < obj.getArguments().size()-1; i++) {
 			FVariable variable = obj.getArguments().get(i);
 			new VarTypeWritter().transform(variable.getType());
+			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName() + ",");
 		}
 		if (obj.getArguments().size() > 0) {
 			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);
 			new VarTypeWritter().transform(variable.getType());
+			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName());
 		}
 		writeln(") {");
@@ -40,17 +42,38 @@ public class MethodWritter extends DefaultWritter<FMethod> {
 			CommandWritter commandWritter = new CommandWritter();
 //			write("\t");
 			commandWritter.transform(c);
-			if (c instanceof FVarDeclaration) write(";");
-			if (c instanceof FVarDeclarationWithInitialization) write(";");
-			if (c instanceof FReturn) write(";");
-			if (c instanceof FMethodCall) write(";");
-			if (c instanceof FAssignment) write(";");
-			if (c instanceof FSystem) write(";");
-			
 			writeln();
 		});
 		
 		writeln("}");
+		writeln();
+	}
+
+	public void writeHead(FMethod obj) {
+		
+		log("Writing head method: " + obj.getName(), 1);
+		
+		log("Args:", 2);
+		obj.getArguments().forEach( variable1 -> {
+			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
+		});
+		
+		new VarTypeWritter().transform(obj.getReturnValueType());
+		write(" " + obj.getName() + "(");
+
+		for (int i = 0; i < obj.getArguments().size()-1; i++) {
+			FVariable variable = obj.getArguments().get(i);
+			new VarTypeWritter().transform(variable.getType());
+			if (variable.getType().getValue().equals("String")) write("*");
+			write(" " + variable.getName() + ",");
+		}
+		if (obj.getArguments().size() > 0) {
+			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);
+			new VarTypeWritter().transform(variable.getType());
+			if (variable.getType().getValue().equals("String")) write("*");
+			write(" " + variable.getName());
+		}
+		writeln(");");
 		writeln();
 	}
 }
