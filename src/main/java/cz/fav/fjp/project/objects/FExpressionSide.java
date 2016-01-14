@@ -34,17 +34,24 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 
 		int openBraces = 0;
 		List<String> saveWords = new LinkedList<String>();
+		boolean typing = false;
 		for(int i=0; i < wordsSize; i++){
 			word = getWords().get(i);
 			if(word.equalsIgnoreCase("(")){
+				// if it is typing -> (char) 0, the brackets must remain
 				if(openBraces > 0){
 					saveWords.add(word);
+				}
+				if (getWords().size() > i + 2 && getWords().get(i + 2).equals(")") && (i <= 1 || !getWords().get(i - 2).equals(".")))
+				{
+					saveWords.add(word);
+					typing = true;
 				}
 				openBraces++;
 				
 			}else if(word.equalsIgnoreCase(")")){
 				openBraces--;
-				if(openBraces > 0) {
+				if(openBraces > 0 || i > 1 && getWords().get(i - 2).equals("(")) {
 					saveWords.add(word);		
 				}
 
@@ -58,6 +65,14 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 					f.parse();
 					saveWords.clear();
 					this.objectList.add(f);
+					if (typing)
+					{
+						FExpressionSide expressionSide = new FExpressionSide(this);
+						expressionSide.setWords(getWords().subList(i, getWords().size()));
+						expressionSide.parse();
+						this.objectList.add(expressionSide);
+						typing = false;
+					}
 				}
 				// TODO with declaration
 				if(Operators.ASSIGN_OPERATORS.contains(word)){

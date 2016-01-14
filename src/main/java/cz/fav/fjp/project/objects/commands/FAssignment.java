@@ -44,9 +44,6 @@ public class FAssignment extends FCommand implements ParentClass {
 		
 		if (toWhere.size() == 1) {
 			fvar.setName(toWhere.get(0));
-			/*FVarType varType = new FVarType();
-			varType.setValue(Utils.getVarType(toWhere.get(0), this));
-			fvar.setType(varType);*/
 			this.setExpr(fexpr);
 			this.setVariable(fvar);
 			this.setOperation(operation);
