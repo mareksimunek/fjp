@@ -26,7 +26,12 @@ public class ObjectInExpWritter extends DefaultWritter<FObjectInExp> {
                 String method = obj.getMethodName();
                 if (method.equals("charAt"))
                 {
-                    write(obj.getName() + "[" + obj.getParamsString() + "]");
+                	if(method.equals("(")){
+                		 write( "[" + obj.getParamsString() + "]");
+                	}else{
+                		 write(obj.getName() + "[" + obj.getParamsString() + "]");
+                	}
+                   
                 }
             default:
                 write("Unknown class " + typeName + "!!!");

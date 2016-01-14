@@ -40,9 +40,8 @@ public class FExpression extends ParsableObject implements ParentClass {
 			if(Operators.INFIX_OPS.contains(word)){
 				fExpSide = new FExpressionSide(this);
 				fExpSide.setWords(getWords().subList(lastSplitIndex, i));
-				if(lastSplitIndex !=0){
-					fExpSide.setOperator(word);
-				}
+				fExpSide.setOperator(word);
+				
 				lastSplitIndex = i +1;
 				fExpSideList.add(fExpSide);
 			}

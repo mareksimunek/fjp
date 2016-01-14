@@ -9,31 +9,42 @@ public class ExpressionSideWritter extends DefaultWritter<FExpressionSide> {
 
 	@Override
 	public void transform(FExpressionSide obj) {
-		
+
 		log("Writting expression side: " + obj.getWords(), 1);
 
-		obj.getObjectList().forEach(object -> {
-			if (object instanceof FAssignment)
-			{
-				new AssignmentWritter().transform((FAssignment)object);
+		if(obj.getObjectList().isEmpty()){
+			
+			obj.getWords().forEach(  w->{
+				write(w +" ");
+			});
+			if(obj.getOperator() != null){
+				write(obj.getOperator()  +" ");
 			}
-			else if (object instanceof FExpressionSide)
-			{
-				new ExpressionSideWritter().transform((FExpressionSide)object);
-			}
-			else if (object instanceof FObjectInExp)
-			{
-				new ObjectInExpWritter().transform((FObjectInExp)object);
-			}
-			else
-			{
-				writeln("Unknown object in expression side!");
-			}
-		});
-		
+
+		}else{
+			obj.getObjectList().forEach(object -> {
+				if (object instanceof FAssignment)
+				{
+					new AssignmentWritter().transform((FAssignment)object);
+				}
+				else if (object instanceof FExpressionSide)
+				{
+					new ExpressionSideWritter().transform((FExpressionSide)object);
+				}
+				else if (object instanceof FObjectInExp)
+				{
+					new ObjectInExpWritter().transform((FObjectInExp)object);
+				}
+				else
+				{
+					writeln("Unknown object in expression side!");
+				}
+			});
+		}
+
 	}
 
 
-	
-	
+
+
 }

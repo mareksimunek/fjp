@@ -25,9 +25,8 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 	@Override
 	public void parse() throws Exception {
 		// TODO Auto-generated method stub
-
-		System.out.println("Parsing expressionSide: " + getWords().toString());
-
+		
+		System.out.println("Parsing expressionSide: " + " "+ getWords().toString()+ " Operator: "+ operator  );
 
 		int wordsSize= getWords().size();
 		String word;
