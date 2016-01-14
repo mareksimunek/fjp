@@ -10,7 +10,6 @@ public class SystemWritter extends DefaultWritter<FSystem> {
 		
 		log("Writing system call:", 3);
 		
-//		write("System call: " + obj.getWords().toString());
-		write(obj.getReturnValue().getReturnValueType());
+		write(obj.parseBrackets(obj.getWords()));
 	}
 }
