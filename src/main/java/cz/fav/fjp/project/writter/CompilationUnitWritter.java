@@ -16,6 +16,15 @@ public class CompilationUnitWritter extends DefaultWritter<FCompilationUnit> {
 		writeln("#include <math.h>");
 		writeln("#include <string.h>");
 		writeln();
+		writeln("#define STR_LEN 256");
+		writeln();
+		writeln("char* readLine() {");
+		writeln("  char str[STR_LEN];");
+		writeln("  fgets(str, STR_LEN, stdin);");
+		writeln("  str[strlen(str) - 1] = '\\0';");
+		writeln("  return str;");
+		writeln("}");
+		writeln();
 		
 		obj.getClasses().forEach( c -> {
 			ClassWritter classWritter = new ClassWritter();

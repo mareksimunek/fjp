@@ -1,6 +1,7 @@
 package cz.fav.fjp.project.writter;
 
 import cz.fav.fjp.project.objects.FCommand;
+import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.objects.commands.FIf;

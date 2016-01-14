@@ -18,6 +18,10 @@ public class FExpression extends ParsableObject implements ParentClass {
 		this.parent = parent;
 	}
 
+	public List<FExpressionSide> getfExpSideList() {
+		return fExpSideList;
+	}
+
 	/**
 	 * For every INFIX_OPS occurrence split getWords and creates new FExpressionSide
 	 * right side saves the operator 

@@ -32,7 +32,14 @@ public class FAssignment extends FCommand implements ParentClass {
 		int j=0;
 		while (!getWords().get(j).contains("=")) toWhere.add(getWords().get(j++));
 		operation = getWords().get(j++);
-		while (!getWords().get(j).equals(";")) what.add(getWords().get(j++));
+		while (j < getWords().size())
+		{
+			if (!getWords().get(j).equals(";"))
+			{
+				what.add(getWords().get(j));
+			}
+			j++;
+		}
 		
 		fexpr.setWords(what);
 		fexpr.parse();

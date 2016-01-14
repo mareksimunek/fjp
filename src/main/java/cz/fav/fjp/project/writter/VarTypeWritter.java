@@ -6,7 +6,7 @@ public class VarTypeWritter extends DefaultWritter<FVarType> {
 
 	@Override
 	public void transform(FVarType obj) {
-		if (obj.getValue().equals("String")) write("char*");
+		if (obj.getValue().equals("String")) write("char");
 		else if (obj.getValue().equals("String[]")) write("char**");
 		else write(obj.getValue());
 	}

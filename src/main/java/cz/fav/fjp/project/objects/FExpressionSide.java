@@ -2,15 +2,15 @@ package cz.fav.fjp.project.objects;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 import cz.fav.fjp.project.enums.Operators;
+import cz.fav.fjp.project.objects.commands.FAssignment;
 
 public class FExpressionSide extends ParsableObject implements ParentClass {
 
 	private String operator;
 	private ParentClass parent;
+	private List<ParentClass> objectList = new LinkedList<>();
 
 
 	public FExpressionSide(ParentClass parent) {
@@ -18,6 +18,9 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 		this.parent = parent;
 	}
 
+	public List<ParentClass> getObjectList() {
+		return objectList;
+	}
 
 	@Override
 	public void parse() throws Exception {
@@ -30,8 +33,6 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 		String word;
 		FObjectInExp obj = null;
 
-
-		List<FObjectInExp> objectList = new LinkedList<FObjectInExp>();
 		int openBraces = 0;
 		List<String> saveWords = new LinkedList<String>();
 		for(int i=0; i < wordsSize; i++){
@@ -57,22 +58,25 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 					f.setWords(new LinkedList<String>(saveWords));
 					f.parse();
 					saveWords.clear();
-					
+					this.objectList.add(f);
 				}
+				// TODO with declaration
 				if(Operators.ASSIGN_OPERATORS.contains(word)){
-					FVariable f = new FVariable(this);
-					int index = i;
-					f.setName(getWords().get(index--));
-					
-					
+					FAssignment assignment = new FAssignment(this);
+					assignment.setWords(getWords());
+					assignment.parse();
+
+					this.objectList.add(assignment);
+					break;
 				}
 				else if(word.equalsIgnoreCase("new")){
 					obj = new FObjectInExp(this);
 					setNewFObject(i, wordsSize, obj);
+					this.objectList.add(obj);
 				}else if(word.equalsIgnoreCase(".")){
 					obj = new FObjectInExp(this);
 					setCalledFObject(i, wordsSize, obj);
-
+					this.objectList.add(obj);
 				}
 
 			}

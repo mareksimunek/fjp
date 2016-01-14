@@ -7,8 +7,7 @@ import cz.fav.fjp.project.objects.*;
 
 public class FVarDeclarationWithInitialization extends FCommand implements ParentClass {
 
-	private FVariable variable;
-	private FExpression expression;
+	private FAssignment assignment;
 
 	private ParentClass parent;
 
@@ -22,7 +21,7 @@ public class FVarDeclarationWithInitialization extends FCommand implements Paren
 		
 		List<String> toWhere = new ArrayList<String>();
 		FVariable fvar = new FVariable(this);
-		String operation = "";
+		String operation;
 		FExpression fexpr = new FExpression(this);
 		List<String> what = new ArrayList<String>();
 		int j=0;
@@ -40,29 +39,26 @@ public class FVarDeclarationWithInitialization extends FCommand implements Paren
 			fVarType.setValue(toWhere.get(0));
 			fvar.setName(toWhere.get(1));
 			fvar.setType(fVarType);
-			this.setVariable(fvar);
-			this.setExpression(fexpr);
+
+			FAssignment fAssignment = new FAssignment(this);
+			fAssignment.setVariable(fvar);
+			fAssignment.setOperation(operation);
+			fAssignment.setExpr(fexpr);
+
+			this.setAssignment(fAssignment);
 		}
 		else if (toWhere.size() == 2) { 
 			System.err.println("Weird assingment: " + getWords().toString());
 		}
 		
 	}
-	
-	public void setVariable(FVariable variable) {
-		this.variable = variable;
+
+	public FAssignment getAssignment() {
+		return assignment;
 	}
-	
-	public FVariable getVariable() {
-		return variable;
-	}
-	
-	public void setExpression(FExpression expression) {
-		this.expression = expression;
-	}
-	
-	public FExpression getExpression() {
-		return expression;
+
+	public void setAssignment(FAssignment assignment) {
+		this.assignment = assignment;
 	}
 
 	public ParentClass getParent() {

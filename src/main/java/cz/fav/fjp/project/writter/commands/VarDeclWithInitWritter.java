@@ -12,8 +12,13 @@ public class VarDeclWithInitWritter extends DefaultWritter<FVarDeclarationWithIn
 		
 		log("Writing command: " + obj.getClass().getName(), 3);
 		
-		new VarTypeWritter().transform(obj.getVariable().getType());
-		write(" " + obj.getVariable().getName() + " = ");
-		new ExpressionWritter().transform(obj.getExpression());
+		new VarTypeWritter().transform(obj.getAssignment().getVariable().getType());
+		String postfix = "";
+		if (obj.getAssignment().getVariable().getType().getValue().equals("String"))
+		{
+			postfix = "[STR_LEN]";
+		}
+		writeln(" " + obj.getAssignment().getVariable().getName() + postfix + ";");
+		new AssignmentWritter().transform(obj.getAssignment());
 	}
 }

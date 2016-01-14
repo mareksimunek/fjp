@@ -8,6 +8,10 @@ public class ExpressionWritter extends DefaultWritter<FExpression> {
 	public void transform(FExpression obj) {
 		
 		log("Writting expression: " + obj.getWords(), 1);
+
+		obj.getfExpSideList().forEach( fExpressionSide -> {
+			new ExpressionSideWritter().transform(fExpressionSide);
+		});
 		
 	}
 

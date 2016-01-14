@@ -10,13 +10,6 @@ public class FObjectInExp extends ParsableObject implements ParentClass{
 	private String methodName;
 	private ParentClass parent;
 	
-	public FObjectInExp(String name,
-			List<String> params) {
-		super();
-		this.name = name;
-		this.params = params;
-	}
-	
 	public FObjectInExp(ParentClass parent) {
 		super();
 		this.parent = parent;
