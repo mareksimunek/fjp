@@ -15,7 +15,8 @@ public class ForWritter extends DefaultWritter<FFor> {
 		
 		write("for ( ");
 		new CommandWritter().transform(obj.getDecl());
-		write(" ; ");
+		// TODO when to write?
+		//write(" ; ");
 		new ExpressionWritter().transform(obj.getCondition());
 		write(" ; ");
 		new CommandWritter().transform(obj.getIncrement());

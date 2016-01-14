@@ -33,6 +33,7 @@ public class ObjectInExpWritter extends DefaultWritter<FObjectInExp> {
                 	}
                    
                 }
+                break;
             default:
                 write("Unknown class " + typeName + "!!!");
         }

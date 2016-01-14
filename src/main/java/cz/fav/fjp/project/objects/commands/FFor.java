@@ -72,7 +72,7 @@ public class FFor extends FCommand implements ParentClass, ObjectWithLocalVars {
 			i = Processor.getContentInsideBrackets(getWords(), cmds, i, "{", "}");
 			fcmds.addAll(CommandBlockParser.parseBlock(cmds, this));
 		}
-		
+		setCommands(fcmds);
 	}
 	
 	public void setDecl(FCommand decl) {

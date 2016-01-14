@@ -40,6 +40,10 @@ public class ExpressionSideWritter extends DefaultWritter<FExpressionSide> {
 					writeln("Unknown object in expression side!");
 				}
 			});
+			if (obj.getOperator() != null)
+			{
+				write(obj.getOperator());
+			}
 		}
 
 	}

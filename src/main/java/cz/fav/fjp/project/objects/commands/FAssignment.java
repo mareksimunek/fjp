@@ -3,10 +3,8 @@ package cz.fav.fjp.project.objects.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.fav.fjp.project.objects.FCommand;
-import cz.fav.fjp.project.objects.FExpression;
-import cz.fav.fjp.project.objects.FVariable;
-import cz.fav.fjp.project.objects.ParentClass;
+import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.objects.*;
 
 public class FAssignment extends FCommand implements ParentClass {
 
@@ -46,6 +44,9 @@ public class FAssignment extends FCommand implements ParentClass {
 		
 		if (toWhere.size() == 1) {
 			fvar.setName(toWhere.get(0));
+			/*FVarType varType = new FVarType();
+			varType.setValue(Utils.getVarType(toWhere.get(0), this));
+			fvar.setType(varType);*/
 			this.setExpr(fexpr);
 			this.setVariable(fvar);
 			this.setOperation(operation);

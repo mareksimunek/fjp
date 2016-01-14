@@ -1,6 +1,8 @@
 package cz.fav.fjp.project.writter.commands;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.objects.FObjectInExp;
+import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
@@ -15,6 +17,7 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 		
 		log("Writing assignment:", 3);
 
+		boolean specialType = false;
 		if (obj.getOperation().equals("="))
 		{
 			String type = "";
@@ -26,15 +29,30 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 			}
 			if (type.equals("String"))
 			{
+				specialType = true;
 				write("strcpy(" + obj.getVariable().getName() + ", ");
 				new ExpressionWritter().transform(obj.getExpr());
-				writeln(")");
+				write(")");
+			}
+			if (type.equals("Scanner"))
+			{
+				// if it is Scanner, it must be System.in, nothing else is currently supported
+				ParentClass p = obj.getExpr().getfExpSideList().get(0).getObjectList().get(0);
+				if (p instanceof FObjectInExp)
+				{
+					if (((FObjectInExp) p).getParams().size() >= 2 && ((FObjectInExp) p).getParams().get(0).equals("System") && ((FObjectInExp) p).getParams().get(1).equals(".") && ((FObjectInExp) p).getParams().get(2).equals("in"))
+					{
+						specialType = true;
+					}
+				}
 			}
 		}
-		else
+
+		if (!specialType)
 		{
 			write(obj.getVariable().getName() + " " + obj.getOperation() + " ");
 			new ExpressionWritter().transform(obj.getExpr());
+			writeln(";");
 		}
 	}
 }
