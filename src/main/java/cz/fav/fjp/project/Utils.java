@@ -1,5 +1,7 @@
 package cz.fav.fjp.project;
 
+import cz.fav.fjp.project.objects.FClass;
+import cz.fav.fjp.project.objects.FMethod;
 import cz.fav.fjp.project.objects.FVarType;
 import cz.fav.fjp.project.objects.FVariable;
 import cz.fav.fjp.project.objects.ObjectWithLocalVars;
@@ -55,4 +57,22 @@ public class Utils {
 		throw new Exception("No such variable exists!");
 	}
 	
+	public static String getMethodReturnType(String name, ParentClass parentClass) throws Exception
+	{
+		while ((parentClass = parentClass.getParent()) != null)
+		{
+			if (parentClass instanceof FClass)
+			{
+				List<FMethod> methods = ((FClass) parentClass).getMethods();
+				for (FMethod method : methods) {
+					if (method.getName().equals(name)) {
+						if (method.getReturnValueType() != null) {
+							return method.getReturnValueType().getValue();
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 }
