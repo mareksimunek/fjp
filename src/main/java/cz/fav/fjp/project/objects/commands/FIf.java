@@ -28,6 +28,7 @@ public class FIf extends FCommand implements ParentClass {
 		int i = 1;
 		FExpression fexpr = new FExpression(this);
 		List<FCommand> fcmds = new ArrayList<FCommand>();
+		List<FCommand> fcmdsElse = new ArrayList<FCommand>();
 
 		List<String> expr = new ArrayList<String>();
 		i = Processor.getContentInsideBrackets(getWords(), expr, i, "(", ")");
@@ -43,10 +44,27 @@ public class FIf extends FCommand implements ParentClass {
 			i = Processor.getContentInsideBrackets(getWords(), cmds, i, "{", "}");
 			fcmds.addAll(CommandBlockParser.parseBlock(cmds, this));
 		}
+		
+		if (i < getWords().size()) {
+			if (getWords().get(i).equals("else")) {
+				i++;
+				
+				if (!getWords().get(i).equals(("{"))) {
+					CommandBlockParser.getSingleCommand(getWords(), cmds, i);
+					FCommand singleCmd = CommandBlockParser.parseSingleCommand(cmds, this);
+					fcmdsElse.add(singleCmd);
+				} else {
+					i = Processor.getContentInsideBrackets(getWords(), cmds, i, "{", "}");
+					fcmdsElse.addAll(CommandBlockParser.parseBlock(cmds, this));
+				}
+				
+			}
+		}
 
 		this.setCondition(fexpr);
 		this.setCommands(fcmds);
-		// TODO else
+		this.setElseCommands(fcmdsElse);
+		
 	}
 
 	public FExpression getCondition() {

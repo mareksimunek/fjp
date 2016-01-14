@@ -135,6 +135,26 @@ public class CommandBlockParser {
 				output.add("{");
 				output.addAll(blockCmd);
 				output.add("}");
+				
+				if (i < words.size()) {
+					if (words.get(i).equals("else")) {
+						i++;
+						
+						if (!words.get(i).equals(("{"))) {
+							ArrayList<String> singleCmd = new ArrayList<String>();
+							i = getSingleCommand(words, singleCmd, i);
+							output.addAll(singleCmd);
+						}
+						else {
+							ArrayList<String> blockCmdElse = new ArrayList<String>();
+							i = Processor.getContentInsideBrackets(words, blockCmdElse, i, "{", "}");
+							output.add("{");
+							output.addAll(blockCmdElse);
+							output.add("}");
+						}
+						
+					}
+				}
 			}
 		} 
 		else if (words.get(i).equals(KeyWords.kwWhile)) {

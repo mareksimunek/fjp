@@ -15,8 +15,6 @@ public class ForWritter extends DefaultWritter<FFor> {
 		
 		write("for ( ");
 		new CommandWritter().writeSemicolons(false).transform(obj.getDecl());
-		// TODO when to write?
-		//write(" ; ");
 		new ExpressionWritter().transform(obj.getCondition());
 		write(" ; ");
 		new CommandWritter().writeSemicolons(false).transform(obj.getIncrement());
