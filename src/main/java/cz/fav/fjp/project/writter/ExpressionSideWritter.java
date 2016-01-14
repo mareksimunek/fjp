@@ -13,12 +13,12 @@ public class ExpressionSideWritter extends DefaultWritter<FExpressionSide> {
 		log("Writting expression side: " + obj.getWords(), 1);
 
 		if(obj.getObjectList().isEmpty()){
-			
+
 			obj.getWords().forEach(  w->{
 				write(w +" ");
 			});
 			if(obj.getOperator() != null){
-				write(obj.getOperator()  +" ");
+				write(" " + obj.getOperator()  +" ");
 			}
 
 		}else{

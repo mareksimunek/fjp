@@ -9,6 +9,8 @@ public class FObjectInExp extends ParsableObject implements ParentClass{
 	List<String> params;
 	private String methodName;
 	private ParentClass parent;
+	private boolean usedByMethodBefore = false;
+	private boolean newInitilization =false;
 	
 	public FObjectInExp(ParentClass parent) {
 		super();
@@ -50,12 +52,14 @@ public class FObjectInExp extends ParsableObject implements ParentClass{
 		this.methodName = methodName;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "FObjectInExp [name=" + name + ", params=" + params
-				+ ", methodName=" + methodName + "]";
+				+ ", methodName=" + methodName + ", parent=" + parent
+				+ ", usedByMethodBefore=" + usedByMethodBefore
+				+ ", newInitilization=" + newInitilization + "]";
 	}
-
 	@Override
 	public void parse() throws Exception {
 		// TODO Auto-generated method stub
@@ -65,7 +69,19 @@ public class FObjectInExp extends ParsableObject implements ParentClass{
 	public ParentClass getParent() {
 		return parent;
 	}
-
+	public boolean isUsedByMethodBefore() {
+		return usedByMethodBefore;
+	}
+	public void setUsedByMethodBefore(boolean usedByMethodBefore) {
+		this.usedByMethodBefore = usedByMethodBefore;
+	}
+	public boolean isNewInitilization() {
+		return newInitilization;
+	}
+	public void setNewInitilization(boolean newInitilization) {
+		this.newInitilization = newInitilization;
+	}
+	
 
 	
 

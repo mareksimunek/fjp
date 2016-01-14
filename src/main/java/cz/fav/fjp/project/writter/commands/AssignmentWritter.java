@@ -1,6 +1,8 @@
 package cz.fav.fjp.project.writter.commands;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
 import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
@@ -14,12 +16,15 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 
 	@Override
 	public void transform(FAssignment obj) {
-		
-		log("Writing assignment:", 3);
+
+		log("Writing assignment: " + obj.toString(), 3);
 
 		boolean specialType = false;
-		if (obj.getOperation().equals("="))
+		boolean isInitilization = isInitilization(obj);
+
+		if (obj.getOperation().equals("=") && !isInitilization)
 		{
+			
 			String type = "";
 			try {
 				type = Utils.getVarType(obj.getVariable().getName(), obj);
@@ -46,13 +51,32 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 					}
 				}
 			}
+
 		}
 
 		if (!specialType)
 		{
-			write(obj.getVariable().getName() + " " + obj.getOperation() + " ");
+			if(!isInitilization){
+				write(obj.getVariable().getName() + " " + obj.getOperation() + " ");
+			}
 			new ExpressionWritter().transform(obj.getExpr());
 			writeln(";");
+			
+		
 		}
+
+	}
+
+
+	boolean isInitilization (FAssignment obj){
+		FExpression f = obj.getExpr();
+		for(FExpressionSide fExpSide : f.getfExpSideList()){
+			for( ParentClass child : fExpSide.getObjectList()){
+				if(child instanceof FObjectInExp && ((FObjectInExp) child).isNewInitilization()){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

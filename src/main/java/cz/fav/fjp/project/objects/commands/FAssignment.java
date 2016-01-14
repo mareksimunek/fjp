@@ -81,4 +81,12 @@ public class FAssignment extends FCommand implements ParentClass {
 	public ParentClass getParent() {
 		return parent;
 	}
+
+	@Override
+	public String toString() {
+		return "FAssignment [variable=" + variable + ", expr=" + expr
+				+ ", operation=" + operation + ", parent=" + parent + "]";
+	}
+	
+	
 }

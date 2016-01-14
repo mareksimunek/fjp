@@ -137,6 +137,7 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 				behindNameIndex++;
 			}
 		}
+		obj.setNewInitilization(true);
 	}
 	void setCalledFObject(int index, int size, FObjectInExp obj){
 		String word;
@@ -155,10 +156,12 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 					if (assignement instanceof FAssignment)
 					{
 						obj.setName(((FAssignment) assignement).getVariable().getName());
+						obj.setUsedByMethodBefore(true);
 					}
 				}
 			}
 		}
+		//System.out.println(obj);
 
 		index += 2;
 		int openBraces = 0;
