@@ -25,5 +25,19 @@ public class IfWritter extends DefaultWritter<FIf> {
 		writeln("}");
 		writeln();
 		
+		if (!obj.getElseCommands().isEmpty()) {
+			writeln(" else { ");
+			obj.getElseCommands().forEach( c -> {
+				CommandWritter commandWritter = new CommandWritter();
+				commandWritter.transform(c);
+			});
+			
+			writeln("}");
+			writeln();
+			
+		}
+		
+		
+		
 	}
 }
