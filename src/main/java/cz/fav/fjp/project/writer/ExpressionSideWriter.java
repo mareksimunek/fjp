@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
 import cz.fav.fjp.project.objects.ParentClass;
@@ -11,7 +12,7 @@ public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 	@Override
 	public void transform(FExpressionSide obj) throws Exception {
 
-		log("Writting expression side: " + obj.getWords(), 1);
+		Logger.log("Writting expression side: " + obj.getWords(), 1);
 
 		if(obj.getObjectList().isEmpty()){
 

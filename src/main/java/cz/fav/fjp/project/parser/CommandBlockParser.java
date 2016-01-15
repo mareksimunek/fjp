@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.fav.fjp.project.enums.KeyWords;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.FVariable;
@@ -38,7 +39,7 @@ public class CommandBlockParser {
 	public static FCommand parseSingleCommand(List<String> command, ParentClass parent) throws Exception {
 		int i = 0;
 		
-		System.out.println("** Parsing single command: " + command.toString());
+		Logger.log("** Parsing single command: " + command.toString(), 3);
 		
 		if (command.get(i).equals(KeyWords.kwIf)) {
 			FIf fif = new FIf(parent);
@@ -94,7 +95,7 @@ public class CommandBlockParser {
 				return fdecl;
 			}
 			else {
-				System.err.println("Weird assingment: " + command.toString());
+				Logger.log("Weird assingment: " + command.toString(), 2);
 			}
 			
 			
@@ -107,7 +108,7 @@ public class CommandBlockParser {
 			return fmethodcall;
 		}
 		else {
-			System.err.println(" * * * * Unrecognized command: " + command.toString());
+			Logger.log(" * * * * Unrecognized command: " + command.toString(), 2);
 		}
 		
 		return null;

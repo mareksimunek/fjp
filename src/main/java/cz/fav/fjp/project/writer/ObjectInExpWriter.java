@@ -1,6 +1,7 @@
 package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FObjectInExp;
 import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
@@ -10,7 +11,7 @@ public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 	@Override
 	public void transform(FObjectInExp obj) throws Exception {
 
-		log("Writting object in expression: " + obj.getName(), 1);
+		Logger.log("Writting object in expression: " + obj.getName(), 1);
 
 		if(obj.isNewInitilization()){
 			objectInitialization(obj);
@@ -78,7 +79,7 @@ public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 			}
 			else
 			{
-				log("Unsupported method " + method + "!!!", 1);
+				Logger.log("Unsupported method " + method + "!!!", 1);
 			}
 			break;
 		default:

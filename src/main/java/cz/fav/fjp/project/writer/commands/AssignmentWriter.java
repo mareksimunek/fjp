@@ -1,6 +1,7 @@
 package cz.fav.fjp.project.writer.commands;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
@@ -14,7 +15,7 @@ public class AssignmentWriter extends DefaultWriter<FAssignment> {
 	@Override
 	public void transform(FAssignment obj) throws Exception {
 
-		log("Writing assignment: " + obj.toString(), 3);
+		Logger.log("Writing assignment: " + obj.toString(), 3);
 
 		boolean specialType = false;
 		boolean isInitilization = isInitilization(obj);

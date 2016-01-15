@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.*;
 
 public class FAssignment extends FCommand implements ParentClass {
@@ -20,7 +21,7 @@ public class FAssignment extends FCommand implements ParentClass {
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing assignment: " + getWords().toString());
+		Logger.log("Parsing assignment: " + getWords().toString(), 2);
 		
 		List<String> toWhere = new ArrayList<String>();
 		FVariable fvar = new FVariable(this);
@@ -49,7 +50,7 @@ public class FAssignment extends FCommand implements ParentClass {
 			this.setOperation(operation);
 		}
 		else if (toWhere.size() == 2) { 
-			System.err.println("Weird assingment: " + getWords().toString());
+			Logger.log("Weird assingment: " + getWords().toString(), 2);
 		}
 		
 	}

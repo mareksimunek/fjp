@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FMethod;
 import cz.fav.fjp.project.objects.FVariable;
@@ -9,11 +10,11 @@ public class MethodWriter extends DefaultWriter<FMethod> {
 	@Override
 	public void transform(FMethod obj) throws Exception {
 		
-		log("Writing method: " + obj.getName(), 1);
+		Logger.log("Writing method: " + obj.getName(), 1);
 		
-		log("Args:", 2);
+		Logger.log("Args:", 2);
 		obj.getArguments().forEach( variable1 -> {
-			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
+			Logger.log(variable1.getType().getValue() + " " + variable1.getName(), 2);
 		});
 		
 		new VarTypeWriter().transform(obj.getReturnValueType());
@@ -46,11 +47,11 @@ public class MethodWriter extends DefaultWriter<FMethod> {
 
 	public void writeHead(FMethod obj) {
 		
-		log("Writing head method: " + obj.getName(), 1);
+		Logger.log("Writing head method: " + obj.getName(), 1);
 		
-		log("Args:", 2);
+		Logger.log("Args:", 2);
 		obj.getArguments().forEach( variable1 -> {
-			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
+			Logger.log(variable1.getType().getValue() + " " + variable1.getName(), 2);
 		});
 		
 		new VarTypeWriter().transform(obj.getReturnValueType());

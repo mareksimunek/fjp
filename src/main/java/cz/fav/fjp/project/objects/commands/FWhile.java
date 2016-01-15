@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.*;
 import cz.fav.fjp.project.parser.CommandBlockParser;
 import cz.fav.fjp.project.parser.Processor;
@@ -24,7 +25,7 @@ public class FWhile extends FCommand implements ParentClass, ObjectWithLocalVars
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing while.");
+		Logger.log("Parsing while.", 2);
 		
 		int i=1;
 		FExpression fexpr = new FExpression(this);
@@ -78,13 +79,12 @@ public class FWhile extends FCommand implements ParentClass, ObjectWithLocalVars
 	@Override
 	public boolean addVarToTable(FVariable variable) {
 		boolean result = Utils.addVarToTable(this.variablesTable, variable);
-		System.out.println("While: Iterating through variables table:");
+		Logger.log("While: Iterating through variables table:", 6);
 		for ( Map.Entry<String, FVarType> entry : this.variablesTable.entrySet() ) {
 			String key = entry.getKey();
 			FVarType value = entry.getValue();
-			System.out.println(value.getValue() + " " + key);
+			Logger.log(value.getValue() + " " + key, 6);
 		}
-		System.out.println("");
 		return result;
 	}
 }

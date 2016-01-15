@@ -2,6 +2,7 @@ package cz.fav.fjp.project.writer;
 
 import java.io.IOException;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FClass;
 import cz.fav.fjp.project.objects.FCompilationUnit;
 
@@ -10,7 +11,7 @@ public class CompilationUnitWriter extends DefaultWriter<FCompilationUnit> {
 	@Override
 	public void transform(FCompilationUnit obj) throws Exception {
 		
-		log("Writing compilation unit: " + obj.getName(), 1);
+		Logger.log("Writing compilation unit: " + obj.getName(), 1);
 		
 		writeln("#include <stdio.h>");
 		writeln("#include <stdlib.h>");

@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer.commands;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.commands.FWhile;
 import cz.fav.fjp.project.writer.CommandWriter;
@@ -11,7 +12,7 @@ public class WhileWriter extends DefaultWriter<FWhile> {
 	@Override
 	public void transform(FWhile obj) throws Exception {
 		
-		log("Writing while:", 3);
+		Logger.log("Writing while:", 3);
 		
 		write("while ( ");
 		new ExpressionWriter().transform(obj.getCondition());

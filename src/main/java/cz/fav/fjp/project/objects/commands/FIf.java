@@ -3,6 +3,7 @@ package cz.fav.fjp.project.objects.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.ParentClass;
@@ -23,7 +24,7 @@ public class FIf extends FCommand implements ParentClass {
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing if.");
+		Logger.log("Parsing if.", 2);
 		
 		int i = 1;
 		FExpression fexpr = new FExpression(this);

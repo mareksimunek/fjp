@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer.commands;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.commands.FIf;
 import cz.fav.fjp.project.writer.CommandWriter;
@@ -11,7 +12,7 @@ public class IfWriter extends DefaultWriter<FIf> {
 	@Override
 	public void transform(FIf obj) throws Exception {
 		
-		log("Writing if:", 3);
+		Logger.log("Writing if:", 3);
 		
 		write("if ( ");
 		new ExpressionWriter().transform(obj.getCondition());

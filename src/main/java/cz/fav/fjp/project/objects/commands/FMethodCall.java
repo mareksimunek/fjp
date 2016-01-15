@@ -3,6 +3,7 @@ package cz.fav.fjp.project.objects.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.FVariable;
@@ -22,19 +23,19 @@ public class FMethodCall extends FCommand implements ParentClass {
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing mehod call: " + getWords().toString());
+		Logger.log("Parsing mehod call: " + getWords().toString(), 2);
 
 		List<String> name = new ArrayList<String>();
 		int i = Processor.getContentInsideBrackets(getWords(), name, 0, getWords().get(0), "(");
 		i--;
 		this.setMethodName(getWords().get(0) + " " + name.toString());
-		System.out.println(getMethodName());
+		Logger.log(getMethodName(), 2);
 		
 		ArrayList<String> args = new ArrayList<String>();
 		i = Processor.getContentInsideBrackets(getWords(), args, i, "(", ")");
 		this.args = new ArrayList<String>();
 		args.stream().filter(s -> !s.equals(",")).forEach(this.args::add);
-		System.out.println(this.args.toString());
+		Logger.log(this.args.toString(), 7);
 		
 	}
 

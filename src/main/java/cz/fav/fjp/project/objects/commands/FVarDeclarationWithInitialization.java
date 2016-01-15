@@ -3,6 +3,7 @@ package cz.fav.fjp.project.objects.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.*;
 
 public class FVarDeclarationWithInitialization extends FCommand implements ParentClass {
@@ -17,7 +18,7 @@ public class FVarDeclarationWithInitialization extends FCommand implements Paren
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing variable declararion with init: " + getWords().toString());
+		Logger.log("Parsing variable declararion with init: " + getWords().toString(), 2);
 		
 		List<String> toWhere = new ArrayList<String>();
 		FVariable fvar = new FVariable(this);
@@ -48,7 +49,7 @@ public class FVarDeclarationWithInitialization extends FCommand implements Paren
 			this.setAssignment(fAssignment);
 		}
 		else if (toWhere.size() == 2) { 
-			System.err.println("Weird assingment: " + getWords().toString());
+			Logger.log("Weird assingment: " + getWords().toString(), 2);
 		}
 		
 	}

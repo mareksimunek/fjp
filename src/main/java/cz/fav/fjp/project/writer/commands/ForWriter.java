@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer.commands;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.commands.FFor;
 import cz.fav.fjp.project.writer.CommandWriter;
@@ -11,7 +12,7 @@ public class ForWriter extends DefaultWriter<FFor> {
 	@Override
 	public void transform(FFor obj) throws Exception {
 		
-		log("Writing for:", 3);
+		Logger.log("Writing for:", 3);
 		
 		write("for ( ");
 		new CommandWriter().writeSemicolons(false).transform(obj.getDecl());

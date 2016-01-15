@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.objects.commands;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FVarType;
 import cz.fav.fjp.project.objects.FVariable;
@@ -17,7 +18,7 @@ public class FVarDeclaration extends FCommand implements ParentClass {
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing variable declaration: " + getWords().toString());
+		Logger.log("Parsing variable declaration: " + getWords().toString(), 2);
 		this.var = new FVariable(this);
 		FVarType type = new FVarType();
 		type.setValue(getWords().get(0));

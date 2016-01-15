@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FExpression;
 import cz.fav.fjp.project.objects.ParentClass;
@@ -29,14 +30,14 @@ public class FSystem extends FCommand implements ParentClass {
 
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing System statement: " + getWords().toString());
+		Logger.log("Parsing System statement: " + getWords().toString(), 2);
 		
 		List<String> expr = new ArrayList<String>();
 		expr.addAll(getWords());
 		
         if (!expr.get(1).equals(".") || !expr.get(2).equals("out") || !expr.get(3).equals(".") || (!expr.get(4).equals("print") && !expr.get(4).equals("println")) || !expr.get(5).equals("("))
         {
-            System.err.println("Weird System: " + expr.toString());
+        	Logger.log("Weird System: " + expr.toString(), 2);
         }
 		
         this.returnValue = new FExpression(this);
@@ -73,7 +74,7 @@ public class FSystem extends FCommand implements ParentClass {
 	}
 	
 	private String getPrintfParamByExprType(String exprType) throws Exception {
-		System.out.println("TYPE: " + exprType);
+		Logger.log("TYPE: " + exprType, 7);
 		if (exprType.equals(INT)) {
 			return "%d ";
 		} else if (exprType.equals(STRING)) {

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cz.fav.fjp.project.enums.Operators;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 
 public class FExpressionSide extends ParsableObject implements ParentClass {
@@ -26,7 +27,7 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 	public void parse() throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Parsing expressionSide: " + " "+ getWords().toString()+ " Operator: "+ operator  );
+		Logger.log("Parsing expressionSide: " + " "+ getWords().toString()+ " Operator: "+ operator, 4);
 
 		int wordsSize= getWords().size();
 		String word;
@@ -98,7 +99,7 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 
 		}
 		if(obj != null){
-			System.out.println("Object from expression: " +obj.toString());
+			Logger.log("Object from expression: " +obj.toString(), 2);
 		}
 
 

@@ -14,7 +14,7 @@ public abstract class DefaultWriter<T> {
 	}
 	
 	public DefaultWriter() {
-		this(WriterSettings.DEF_OUT_STREAMWRITER);
+		this(WriterSettings.output);
 	}
 	
 	protected void write(String s) {
@@ -35,17 +35,6 @@ public abstract class DefaultWriter<T> {
 	
 	protected void writeln() {
 		this.write(System.lineSeparator());
-	}
-	
-	protected void log(String s, int level)  {
-		if (level <= WriterSettings.LOG_LEVEL)	{
-			try {
-				for (int i=0; i<level*2; i++) WriterSettings.DEF_OUT_LOG.write(" ");
-				WriterSettings.DEF_OUT_LOG.write("[LOG]: " + s + System.lineSeparator());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	abstract public void transform(T obj) throws Exception ;

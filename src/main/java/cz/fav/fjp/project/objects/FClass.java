@@ -3,6 +3,7 @@ package cz.fav.fjp.project.objects;
 import java.util.*;
 
 import cz.fav.fjp.project.Utils;
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.parser.FClassParser;
 
 public class FClass extends ParsableObject implements ParentClass, ObjectWithLocalVars {
@@ -57,13 +58,12 @@ public class FClass extends ParsableObject implements ParentClass, ObjectWithLoc
 	public boolean addVarToTable(FVariable variable)
 	{
 		boolean result = Utils.addVarToTable(this.variablesTable, variable);
-		System.out.println("Class " + this.getName() + ": Iterating through variables table:");
+		Logger.log("Class " + this.getName() + ": Iterating through variables table:", 2);
 		for ( Map.Entry<String, FVarType> entry : this.variablesTable.entrySet() ) {
 			String key = entry.getKey();
 			FVarType value = entry.getValue();
-			System.out.println(value.getValue() + " " + key);
+			Logger.log(value.getValue() + " " + key, 7);
 		}
-		System.out.println("");
 		return result;
 	}
 	

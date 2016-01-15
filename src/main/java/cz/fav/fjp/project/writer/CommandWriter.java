@@ -1,5 +1,6 @@
 package cz.fav.fjp.project.writer;
 
+import cz.fav.fjp.project.logger.Logger;
 import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.objects.commands.FFor;
@@ -27,7 +28,7 @@ public class CommandWriter extends DefaultWriter<FCommand> {
 	@Override
 	public void transform(FCommand obj) throws Exception {
 		
-		log("Writing command: " + obj.getClass().getName(), 5);
+		Logger.log("Writing command: " + obj.getClass().getName(), 5);
 		
 		if (obj instanceof FFor) new ForWriter().transform((FFor) obj);
 		else if (obj instanceof FIf) new IfWriter().transform((FIf) obj);

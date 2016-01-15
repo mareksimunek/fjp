@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cz.fav.fjp.project.enums.Operators;
+import cz.fav.fjp.project.logger.Logger;
 
 
 public class FExpression extends ParsableObject implements ParentClass {
@@ -28,7 +29,7 @@ public class FExpression extends ParsableObject implements ParentClass {
 	 */
 	@Override
 	public void parse() throws Exception {
-		System.out.println("Parsing expression: " + getWords().toString());
+		Logger.log("Parsing expression: " + getWords().toString(), 4);
 		int wordsSize= getWords().size();
 		String word;
 		int lastSplitIndex = 0;
