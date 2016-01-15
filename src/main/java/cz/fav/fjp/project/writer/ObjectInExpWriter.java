@@ -8,7 +8,7 @@ import cz.fav.fjp.project.objects.commands.FAssignment;
 public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 
 	@Override
-	public void transform(FObjectInExp obj) {
+	public void transform(FObjectInExp obj) throws Exception {
 
 		log("Writting object in expression: " + obj.getName(), 1);
 
@@ -52,14 +52,10 @@ public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 	}
 
 
-	public void objectCall(FObjectInExp obj){
+	public void objectCall(FObjectInExp obj) throws Exception{
 		String typeName = "";
-		try {
-			typeName = Utils.getVarType(obj.getName(), obj);
+		typeName = Utils.getVarType(obj.getName(), obj);
 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 		switch (typeName)
 		{
 		case "Scanner":

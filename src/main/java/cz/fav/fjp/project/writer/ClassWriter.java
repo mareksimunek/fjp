@@ -1,11 +1,12 @@
 package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FClass;
+import cz.fav.fjp.project.objects.FMethod;
 
 public class ClassWriter extends DefaultWriter<FClass> {
 
 	@Override
-	public void transform(FClass obj) {
+	public void transform(FClass obj) throws Exception {
 		
 		log("Writting class: " + obj.getName(), 1);
 		
@@ -31,10 +32,11 @@ public class ClassWriter extends DefaultWriter<FClass> {
 			methodWriter.writeHead(m);
 		});
 
-		obj.getMethods().forEach( m -> {
+		for (FMethod m : obj.getMethods()) {
 			MethodWriter methodWriter = new MethodWriter();
 			methodWriter.transform(m);
-		});
+		}
+		
 		writeln();
 		
 		

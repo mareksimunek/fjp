@@ -7,7 +7,7 @@ import cz.fav.fjp.project.writer.ExpressionWriter;
 public class ReturnWriter extends DefaultWriter<FReturn> {
 
 	@Override
-	public void transform(FReturn obj) {
+	public void transform(FReturn obj) throws Exception {
 		
 		log("Writing command: " + obj.getClass().getName(), 3);
 		

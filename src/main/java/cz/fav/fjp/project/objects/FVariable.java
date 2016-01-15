@@ -15,13 +15,9 @@ public class FVariable implements ParentClass {
 		return type;
 	}
 	
-	public void setType(FVarType type) {
+	public void setType(FVarType type) throws Exception {
 		this.type = type;
-		try {
-			this.setVarToTable();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		this.setVarToTable();
 	}
 	
 	public String getName() {

@@ -6,10 +6,10 @@ import cz.fav.fjp.project.writer.DefaultWriter;
 public class SystemWriter extends DefaultWriter<FSystem> {
 
 	@Override
-	public void transform(FSystem obj) {
+	public void transform(FSystem obj) throws Exception {
 		
 		log("Writing system call:", 3);
 		
-		write(obj.parseBrackets(obj.getWords()));
+		write(obj.parseBrackets());
 	}
 }

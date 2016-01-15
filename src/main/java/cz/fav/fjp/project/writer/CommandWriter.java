@@ -25,7 +25,7 @@ public class CommandWriter extends DefaultWriter<FCommand> {
 	private boolean writeSemicolons = true;
 	
 	@Override
-	public void transform(FCommand obj) {
+	public void transform(FCommand obj) throws Exception {
 		
 		log("Writing command: " + obj.getClass().getName(), 5);
 		

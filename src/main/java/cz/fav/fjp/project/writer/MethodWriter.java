@@ -1,12 +1,13 @@
 package cz.fav.fjp.project.writer;
 
+import cz.fav.fjp.project.objects.FCommand;
 import cz.fav.fjp.project.objects.FMethod;
 import cz.fav.fjp.project.objects.FVariable;
 
 public class MethodWriter extends DefaultWriter<FMethod> {
 
 	@Override
-	public void transform(FMethod obj) {
+	public void transform(FMethod obj) throws Exception {
 		
 		log("Writing method: " + obj.getName(), 1);
 		
@@ -32,12 +33,12 @@ public class MethodWriter extends DefaultWriter<FMethod> {
 		}
 		writeln(") {");
 		
-		obj.getCommnands().forEach( c -> {
+		for (FCommand c : obj.getCommnands()) {
 			CommandWriter commandWriter = new CommandWriter();
 //			write("\t");
 			commandWriter.transform(c);
 			writeln();
-		});
+		}
 		
 		writeln("}");
 		writeln();

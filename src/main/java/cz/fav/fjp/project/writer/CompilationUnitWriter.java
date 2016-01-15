@@ -2,12 +2,13 @@ package cz.fav.fjp.project.writer;
 
 import java.io.IOException;
 
+import cz.fav.fjp.project.objects.FClass;
 import cz.fav.fjp.project.objects.FCompilationUnit;
 
 public class CompilationUnitWriter extends DefaultWriter<FCompilationUnit> {
 
 	@Override
-	public void transform(FCompilationUnit obj) {
+	public void transform(FCompilationUnit obj) throws Exception {
 		
 		log("Writing compilation unit: " + obj.getName(), 1);
 		
@@ -27,12 +28,10 @@ public class CompilationUnitWriter extends DefaultWriter<FCompilationUnit> {
 		writeln("}");
 		writeln();
 		
-		obj.getClasses().forEach( c -> {
+		for (FClass c : obj.getClasses()) {
 			ClassWriter classWriter = new ClassWriter();
 			classWriter.transform(c);
-		});
-		
-		
+		}
 		
 		try {
 			writer.close();

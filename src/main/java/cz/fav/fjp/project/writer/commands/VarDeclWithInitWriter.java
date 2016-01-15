@@ -7,7 +7,7 @@ import cz.fav.fjp.project.writer.VarTypeWriter;
 public class VarDeclWithInitWriter extends DefaultWriter<FVarDeclarationWithInitialization> {
 
 	@Override
-	public void transform(FVarDeclarationWithInitialization obj) {
+	public void transform(FVarDeclarationWithInitialization obj) throws Exception {
 		
 		log("Writing command: " + obj.getClass().getName(), 3);
 		

@@ -60,44 +60,35 @@ public class FSystem extends FCommand implements ParentClass {
         return expression.matches("[0-9]+");
     }
 	
-	private String getTypeOfExpression(String expr) {
-		System.out.println("Expression in process: " + expr);
-		try {
-			if (isInteger(expr)) {
-				return INT;
-			} else {
-				String type = Utils.getMethodReturnType(expr, this);
-				if (type != null) {
-					System.out.println("getMethodReturnType :" + type);
-					return type;
-				}
-				return Utils.getVarType(expr, this);
+	private String getTypeOfExpression(String expr) throws Exception {
+		if (isInteger(expr)) {
+			return INT;
+		} else {
+			String type = Utils.getMethodReturnType(expr, this);
+			if (type != null) {
+				return type;
 			}
-		} catch (Exception e) {
-			return UNKNOWN;
+			return Utils.getVarType(expr, this);
 		}
 	}
 	
-	private String getPrintfParamByExprType(String exprType) {
+	private String getPrintfParamByExprType(String exprType) throws Exception {
 		System.out.println("TYPE: " + exprType);
-		try {
-			if (exprType.equals(INT)) {
-				return "%d ";
-			} else if (exprType.equals(STRING)) {
-				return "%s ";
-			} else if (exprType.equals(FLOAT)) {
-				return "%f ";
-			} else if (exprType.equals(CHAR)) {
-				return "%c ";
-			} else {
-				return "%-1 ";
-			}
-		} catch (Exception e) {
-			return "%-1 ";
+		if (exprType.equals(INT)) {
+			return "%d ";
+		} else if (exprType.equals(STRING)) {
+			return "%s ";
+		} else if (exprType.equals(FLOAT)) {
+			return "%f ";
+		} else if (exprType.equals(CHAR)) {
+			return "%c ";
+		} else {
+			throw new Exception("Unknown data type!");
 		}
 	}
 	
-	public String parseBrackets(List<String> expr) {
+	public String parseBrackets() throws Exception {
+		List<String> expr = getWords();
 		String partText = new String(PRINTF + "(\"");
 		String partParams = new String();
 		int i = 6;

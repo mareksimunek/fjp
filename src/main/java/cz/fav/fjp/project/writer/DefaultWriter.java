@@ -43,12 +43,11 @@ public abstract class DefaultWriter<T> {
 				for (int i=0; i<level*2; i++) WriterSettings.DEF_OUT_LOG.write(" ");
 				WriterSettings.DEF_OUT_LOG.write("[LOG]: " + s + System.lineSeparator());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	abstract public void transform(T obj);
+	abstract public void transform(T obj) throws Exception ;
 	
 }

@@ -1,17 +1,18 @@
 package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FExpression;
+import cz.fav.fjp.project.objects.FExpressionSide;
 
 public class ExpressionWriter extends DefaultWriter<FExpression> {
 
 	@Override
-	public void transform(FExpression obj) {
+	public void transform(FExpression obj) throws Exception {
 		
 		log("Writting expression: " + obj.getWords(), 1);
 
-		obj.getfExpSideList().forEach( fExpressionSide -> {
+		for (FExpressionSide fExpressionSide : obj.getfExpSideList()) {
 			new ExpressionSideWriter().transform(fExpressionSide);
-		});
+		}
 		
 	}
 

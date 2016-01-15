@@ -12,7 +12,7 @@ import cz.fav.fjp.project.writer.ExpressionWriter;
 public class AssignmentWriter extends DefaultWriter<FAssignment> {
 
 	@Override
-	public void transform(FAssignment obj) {
+	public void transform(FAssignment obj) throws Exception {
 
 		log("Writing assignment: " + obj.toString(), 3);
 
@@ -23,12 +23,8 @@ public class AssignmentWriter extends DefaultWriter<FAssignment> {
 		{
 			
 			String type = "";
-			try {
-				type = Utils.getVarType(obj.getVariable().getName(), obj);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
+			type = Utils.getVarType(obj.getVariable().getName(), obj);
+
 			if (type.equals("String"))
 			{
 				specialType = true;

@@ -2,13 +2,14 @@ package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
+import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 import cz.fav.fjp.project.writer.commands.AssignmentWriter;
 
 public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 
 	@Override
-	public void transform(FExpressionSide obj) {
+	public void transform(FExpressionSide obj) throws Exception {
 
 		log("Writting expression side: " + obj.getWords(), 1);
 
@@ -22,7 +23,7 @@ public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 			}
 
 		}else{
-			obj.getObjectList().forEach(object -> {
+			for (ParentClass object : obj.getObjectList()) {
 				if (object instanceof FAssignment)
 				{
 					new AssignmentWriter().transform((FAssignment)object);
@@ -39,7 +40,7 @@ public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 				{
 					writeln("Unknown object in expression side!");
 				}
-			});
+			}
 			if (obj.getOperator() != null)
 			{
 				write(obj.getOperator());

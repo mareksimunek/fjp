@@ -75,7 +75,7 @@ public class FClassParser {
 		}
 	}
 	
-	private static List<FVariable> parseArgs(List<String> args, ParentClass parent) {
+	private static List<FVariable> parseArgs(List<String> args, ParentClass parent) throws Exception {
 		List<FVariable> ret = new ArrayList<FVariable>();
 		int i=0;
 		while (i < args.size()) {
