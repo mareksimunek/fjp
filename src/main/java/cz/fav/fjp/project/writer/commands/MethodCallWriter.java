@@ -1,10 +1,9 @@
-package cz.fav.fjp.project.writter.commands;
+package cz.fav.fjp.project.writer.commands;
 
 import cz.fav.fjp.project.objects.commands.FMethodCall;
-import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
-import cz.fav.fjp.project.writter.DefaultWritter;
+import cz.fav.fjp.project.writer.DefaultWriter;
 
-public class MethodCallWritter extends DefaultWritter<FMethodCall> {
+public class MethodCallWriter extends DefaultWriter<FMethodCall> {
 
 	@Override
 	public void transform(FMethodCall obj) {

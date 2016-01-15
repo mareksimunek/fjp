@@ -1,21 +1,20 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import cz.fav.fjp.project.StringTable;
-import cz.fav.fjp.project.objects.ParsableObject;
 
-public abstract class DefaultWritter<T> {
+public abstract class DefaultWriter<T> {
 
-	protected OutputStreamWriter writter;
+	protected OutputStreamWriter writer;
 	
-	public DefaultWritter(OutputStreamWriter wr) {
-		this.writter = wr;
+	public DefaultWriter(OutputStreamWriter wr) {
+		this.writer = wr;
 	}
 	
-	public DefaultWritter() {
-		this(WritterSettings.DEF_OUT_STREAMWRITTER);
+	public DefaultWriter() {
+		this(WriterSettings.DEF_OUT_STREAMWRITER);
 	}
 	
 	protected void write(String s) {
@@ -24,7 +23,7 @@ public abstract class DefaultWritter<T> {
 			for (String code: StringTable.codeToString.keySet()) {
 				res = res.replace(code, StringTable.getString(code));
 			}
-			this.writter.write(res);
+			this.writer.write(res);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -39,10 +38,10 @@ public abstract class DefaultWritter<T> {
 	}
 	
 	protected void log(String s, int level)  {
-		if (level <= WritterSettings.LOG_LEVEL)	{
+		if (level <= WriterSettings.LOG_LEVEL)	{
 			try {
-				for (int i=0; i<level*2; i++) WritterSettings.DEF_OUT_LOG.write(" ");
-				WritterSettings.DEF_OUT_LOG.write("[LOG]: " + s + System.lineSeparator());
+				for (int i=0; i<level*2; i++) WriterSettings.DEF_OUT_LOG.write(" ");
+				WriterSettings.DEF_OUT_LOG.write("[LOG]: " + s + System.lineSeparator());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

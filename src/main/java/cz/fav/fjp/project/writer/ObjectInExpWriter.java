@@ -1,12 +1,11 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.Utils;
 import cz.fav.fjp.project.objects.FObjectInExp;
-import cz.fav.fjp.project.objects.ObjectWithLocalVars;
 import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
 
-public class ObjectInExpWritter extends DefaultWritter<FObjectInExp> {
+public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 
 	@Override
 	public void transform(FObjectInExp obj) {

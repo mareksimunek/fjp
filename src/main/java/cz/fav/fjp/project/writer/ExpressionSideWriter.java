@@ -1,11 +1,11 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
 import cz.fav.fjp.project.objects.commands.FAssignment;
-import cz.fav.fjp.project.writter.commands.AssignmentWritter;
+import cz.fav.fjp.project.writer.commands.AssignmentWriter;
 
-public class ExpressionSideWritter extends DefaultWritter<FExpressionSide> {
+public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 
 	@Override
 	public void transform(FExpressionSide obj) {
@@ -25,15 +25,15 @@ public class ExpressionSideWritter extends DefaultWritter<FExpressionSide> {
 			obj.getObjectList().forEach(object -> {
 				if (object instanceof FAssignment)
 				{
-					new AssignmentWritter().transform((FAssignment)object);
+					new AssignmentWriter().transform((FAssignment)object);
 				}
 				else if (object instanceof FExpressionSide)
 				{
-					new ExpressionSideWritter().transform((FExpressionSide)object);
+					new ExpressionSideWriter().transform((FExpressionSide)object);
 				}
 				else if (object instanceof FObjectInExp)
 				{
-					new ObjectInExpWritter().transform((FObjectInExp)object);
+					new ObjectInExpWriter().transform((FObjectInExp)object);
 				}
 				else
 				{

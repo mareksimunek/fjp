@@ -1,4 +1,4 @@
-package cz.fav.fjp.project.writter.commands;
+package cz.fav.fjp.project.writer.commands;
 
 import cz.fav.fjp.project.Utils;
 import cz.fav.fjp.project.objects.FExpression;
@@ -6,13 +6,10 @@ import cz.fav.fjp.project.objects.FExpressionSide;
 import cz.fav.fjp.project.objects.FObjectInExp;
 import cz.fav.fjp.project.objects.ParentClass;
 import cz.fav.fjp.project.objects.commands.FAssignment;
-import cz.fav.fjp.project.objects.commands.FFor;
-import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
-import cz.fav.fjp.project.writter.CommandWritter;
-import cz.fav.fjp.project.writter.DefaultWritter;
-import cz.fav.fjp.project.writter.ExpressionWritter;
+import cz.fav.fjp.project.writer.DefaultWriter;
+import cz.fav.fjp.project.writer.ExpressionWriter;
 
-public class AssignmentWritter extends DefaultWritter<FAssignment> {
+public class AssignmentWriter extends DefaultWriter<FAssignment> {
 
 	@Override
 	public void transform(FAssignment obj) {
@@ -36,7 +33,7 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 			{
 				specialType = true;
 				write("strcpy(" + obj.getVariable().getName() + ", ");
-				new ExpressionWritter().transform(obj.getExpr());
+				new ExpressionWriter().transform(obj.getExpr());
 				write(")");
 			}
 			if (type.equals("Scanner"))
@@ -59,7 +56,7 @@ public class AssignmentWritter extends DefaultWritter<FAssignment> {
 			if(!isInitilization){
 				write(obj.getVariable().getName() + " " + obj.getOperation() + " ");
 			}
-			new ExpressionWritter().transform(obj.getExpr());
+			new ExpressionWriter().transform(obj.getExpr());
 			writeln(";");
 			
 		

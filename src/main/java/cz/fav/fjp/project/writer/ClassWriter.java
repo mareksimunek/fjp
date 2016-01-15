@@ -1,8 +1,8 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FClass;
 
-public class ClassWritter extends DefaultWritter<FClass> {
+public class ClassWriter extends DefaultWriter<FClass> {
 
 	@Override
 	public void transform(FClass obj) {
@@ -17,7 +17,7 @@ public class ClassWritter extends DefaultWritter<FClass> {
 				if (s.equals("static")) write("static ");
 			});
 			
-			new VarTypeWritter().transform(a.getVariable().getType());
+			new VarTypeWriter().transform(a.getVariable().getType());
 			if (a.getVariable().getType().getValue().equals("String")) write("*");
 			write(" ");
 			write(a.getVariable().getName() + " ");
@@ -27,13 +27,13 @@ public class ClassWritter extends DefaultWritter<FClass> {
 		writeln();
 
 		obj.getMethods().forEach( m -> {
-			MethodWritter methodWritter = new MethodWritter();
-			methodWritter.writeHead(m);
+			MethodWriter methodWriter = new MethodWriter();
+			methodWriter.writeHead(m);
 		});
 
 		obj.getMethods().forEach( m -> {
-			MethodWritter methodWritter = new MethodWritter();
-			methodWritter.transform(m);
+			MethodWriter methodWriter = new MethodWriter();
+			methodWriter.transform(m);
 		});
 		writeln();
 		

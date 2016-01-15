@@ -1,9 +1,9 @@
-package cz.fav.fjp.project.writter.commands;
+package cz.fav.fjp.project.writer.commands;
 
 import cz.fav.fjp.project.objects.commands.FSystem;
-import cz.fav.fjp.project.writter.DefaultWritter;
+import cz.fav.fjp.project.writer.DefaultWriter;
 
-public class SystemWritter extends DefaultWritter<FSystem> {
+public class SystemWriter extends DefaultWriter<FSystem> {
 
 	@Override
 	public void transform(FSystem obj) {

@@ -1,15 +1,9 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import cz.fav.fjp.project.objects.FMethod;
 import cz.fav.fjp.project.objects.FVariable;
-import cz.fav.fjp.project.objects.commands.FAssignment;
-import cz.fav.fjp.project.objects.commands.FMethodCall;
-import cz.fav.fjp.project.objects.commands.FReturn;
-import cz.fav.fjp.project.objects.commands.FSystem;
-import cz.fav.fjp.project.objects.commands.FVarDeclaration;
-import cz.fav.fjp.project.objects.commands.FVarDeclarationWithInitialization;
 
-public class MethodWritter extends DefaultWritter<FMethod> {
+public class MethodWriter extends DefaultWriter<FMethod> {
 
 	@Override
 	public void transform(FMethod obj) {
@@ -21,27 +15,27 @@ public class MethodWritter extends DefaultWritter<FMethod> {
 			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
 		});
 		
-		new VarTypeWritter().transform(obj.getReturnValueType());
+		new VarTypeWriter().transform(obj.getReturnValueType());
 		write(" " + obj.getName() + "(");
 
 		for (int i = 0; i < obj.getArguments().size()-1; i++) {
 			FVariable variable = obj.getArguments().get(i);
-			new VarTypeWritter().transform(variable.getType());
+			new VarTypeWriter().transform(variable.getType());
 			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName() + ",");
 		}
 		if (obj.getArguments().size() > 0) {
 			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);
-			new VarTypeWritter().transform(variable.getType());
+			new VarTypeWriter().transform(variable.getType());
 			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName());
 		}
 		writeln(") {");
 		
 		obj.getCommnands().forEach( c -> {
-			CommandWritter commandWritter = new CommandWritter();
+			CommandWriter commandWriter = new CommandWriter();
 //			write("\t");
-			commandWritter.transform(c);
+			commandWriter.transform(c);
 			writeln();
 		});
 		
@@ -58,18 +52,18 @@ public class MethodWritter extends DefaultWritter<FMethod> {
 			log(variable1.getType().getValue() + " " + variable1.getName(), 2);
 		});
 		
-		new VarTypeWritter().transform(obj.getReturnValueType());
+		new VarTypeWriter().transform(obj.getReturnValueType());
 		write(" " + obj.getName() + "(");
 
 		for (int i = 0; i < obj.getArguments().size()-1; i++) {
 			FVariable variable = obj.getArguments().get(i);
-			new VarTypeWritter().transform(variable.getType());
+			new VarTypeWriter().transform(variable.getType());
 			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName() + ",");
 		}
 		if (obj.getArguments().size() > 0) {
 			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);
-			new VarTypeWritter().transform(variable.getType());
+			new VarTypeWriter().transform(variable.getType());
 			if (variable.getType().getValue().equals("String")) write("*");
 			write(" " + variable.getName());
 		}

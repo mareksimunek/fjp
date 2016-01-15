@@ -1,10 +1,10 @@
-package cz.fav.fjp.project.writter;
+package cz.fav.fjp.project.writer;
 
 import java.io.IOException;
 
 import cz.fav.fjp.project.objects.FCompilationUnit;
 
-public class CompilationUnitWritter extends DefaultWritter<FCompilationUnit> {
+public class CompilationUnitWriter extends DefaultWriter<FCompilationUnit> {
 
 	@Override
 	public void transform(FCompilationUnit obj) {
@@ -28,14 +28,14 @@ public class CompilationUnitWritter extends DefaultWritter<FCompilationUnit> {
 		writeln();
 		
 		obj.getClasses().forEach( c -> {
-			ClassWritter classWritter = new ClassWritter();
-			classWritter.transform(c);
+			ClassWriter classWriter = new ClassWriter();
+			classWriter.transform(c);
 		});
 		
 		
 		
 		try {
-			writter.close();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

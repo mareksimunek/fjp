@@ -7,8 +7,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 import cz.fav.fjp.project.objects.FCompilationUnit;
-import cz.fav.fjp.project.writter.CompilationUnitWritter;
-import cz.fav.fjp.project.writter.WritterSettings;
+import cz.fav.fjp.project.writer.CompilationUnitWriter;
 
 
 public class Main {
@@ -36,7 +35,7 @@ public class Main {
 		System.out.println();
 		System.out.println();
 		
-		CompilationUnitWritter wr = new CompilationUnitWritter();
+		CompilationUnitWriter wr = new CompilationUnitWriter();
 		wr.transform(unit);
 		
 		
