@@ -77,6 +77,14 @@ public class ObjectInExpWritter extends DefaultWritter<FObjectInExp> {
 				}
 
 			}
+			else if (method.equals("length"))
+			{
+				write("strlen(" + obj.getName() + ")");
+			}
+			else
+			{
+				log("Unsupported method " + method + "!!!", 1);
+			}
 			break;
 		default:
 			write("Unknown class " + typeName + "!!!");
