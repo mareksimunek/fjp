@@ -77,6 +77,14 @@ public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 			{
 				write("strlen(" + obj.getName() + ")");
 			}
+			else if (method.equals("equals"))
+			{
+				write("strcmp(" + obj.getName() + ", "+ obj.getParamsString()+ ")");
+			}
+			else if (method.equals("indexOf"))
+			{
+				write("strcspn(" + obj.getName() + ", "+ obj.getParamsString()+ ")");
+			}
 			else
 			{
 				Logger.log("Unsupported method " + method + "!!!", 1);

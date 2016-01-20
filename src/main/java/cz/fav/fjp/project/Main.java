@@ -41,9 +41,7 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			Logger.output.flush();
 			Logger.output.close();
-			WriterSettings.output.flush();
 			WriterSettings.output.close();
 		}
 		

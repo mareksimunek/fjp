@@ -11,6 +11,7 @@ public class MethodWriter extends DefaultWriter<FMethod> {
 	public void transform(FMethod obj) throws Exception {
 		
 		Logger.log("Writing method: " + obj.getName(), 1);
+		Logger.log("Writing arg: " + obj.getArguments().toString(), 1);
 		
 		Logger.log("Args:", 2);
 		obj.getArguments().forEach( variable1 -> {
@@ -24,7 +25,7 @@ public class MethodWriter extends DefaultWriter<FMethod> {
 			FVariable variable = obj.getArguments().get(i);
 			new VarTypeWriter().transform(variable.getType());
 			if (variable.getType().getValue().equals("String")) write("*");
-			write(" " + variable.getName() + ",");
+			write(" " + variable.getName() + ", ");
 		}
 		if (obj.getArguments().size() > 0) {
 			FVariable variable = obj.getArguments().get(obj.getArguments().size()-1);

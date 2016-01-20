@@ -53,6 +53,7 @@ public class AssignmentWriter extends DefaultWriter<FAssignment> {
 			if(!isInitilization){
 				write(obj.getVariable().getName() + " " + obj.getOperation() + " ");
 			}
+			
 			new ExpressionWriter().transform(obj.getExpr());
 			writeln(";");
 			

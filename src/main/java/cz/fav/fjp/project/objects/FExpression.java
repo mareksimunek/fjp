@@ -81,4 +81,10 @@ public class FExpression extends ParsableObject implements ParentClass {
 	public ParentClass getParent() {
 		return parent;
 	}
+
+	@Override
+	public String toString() {
+		return "FExpression ["+ fExpSideList				+ "]";
+	}
+	
 }

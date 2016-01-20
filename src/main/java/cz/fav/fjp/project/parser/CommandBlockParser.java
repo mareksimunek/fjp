@@ -136,9 +136,9 @@ public class CommandBlockParser {
 				output.add("{");
 				output.addAll(blockCmd);
 				output.add("}");
-				
 				if (i < words.size()) {
 					if (words.get(i).equals("else")) {
+						output.add("else");
 						i++;
 						
 						if (!words.get(i).equals(("{"))) {

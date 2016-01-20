@@ -19,6 +19,7 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 		this.parent = parent;
 	}
 
+
 	public List<ParentClass> getObjectList() {
 		return objectList;
 	}
@@ -201,5 +202,14 @@ public class FExpressionSide extends ParsableObject implements ParentClass {
 		
 		return parent;
 	}
+
+
+	@Override
+	public String toString() {
+		return "FExpressionSide ["+ getWords()+ "]";
+	}
+	
+
+	
 
 }

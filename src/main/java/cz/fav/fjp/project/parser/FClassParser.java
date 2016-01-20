@@ -86,7 +86,8 @@ public class FClassParser {
 				type += "[]";
 				i +=2;
 			}
-			variable.setName(args.get(i));
+			String varName = args.get(i).replace(",", ""); //get rid of comma
+			variable.setName(varName);
 			FVarType vt = new FVarType();
 			vt.setValue(type);
 			variable.setType(vt);

@@ -96,14 +96,15 @@ public class FSystem extends FCommand implements ParentClass {
     	boolean isPreviousInt = false;
     	while (i < expr.size() - 2) {
     		String currentExpr = expr.get(i);
-    		
     		if (currentExpr.charAt(0) == '\"' && currentExpr.charAt(currentExpr.length() - 1) == '\"') {
             	partText += currentExpr.replaceAll("\"", " ").trim() + " ";
-            } else if (currentExpr.equals("#STRING_3")) {
+            } else if (currentExpr.startsWith("#STRING")) {
+            	
             	partText += currentExpr.replaceAll("\"", " ").trim() + " ";
             } else if (!currentExpr.equals("+")) {
             	
             	String dataType;
+            	
             	if (isInteger(currentExpr)) {
             		dataType = getTypeOfExpression(currentExpr);
             		if (isPreviousInt) {
@@ -134,6 +135,7 @@ public class FSystem extends FCommand implements ParentClass {
             			}
             			i += 2;
             		}
+            		
             		dataType = getTypeOfExpression(currentExpr);
             		if (dataType.equals(INT)) {
             			if (isPreviousInt) {
@@ -159,7 +161,6 @@ public class FSystem extends FCommand implements ParentClass {
         } else {
             partText += "\"";
         }
-       
         return partText + partParams.trim() + ")";
 	}
 }

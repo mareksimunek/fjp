@@ -47,7 +47,7 @@ public class CommandWriter extends DefaultWriter<FCommand> {
 		if (obj instanceof FVarDeclarationWithInitialization) write(";");
 		if (obj instanceof FReturn) write(";");
 		if (obj instanceof FMethodCall) write(";");
-		if (obj instanceof FAssignment) write(";");
+		//if (obj instanceof FAssignment) write(";");
 		if (obj instanceof FSystem) write(";");
 
 	}
