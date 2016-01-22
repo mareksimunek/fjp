@@ -24,6 +24,10 @@ public class Main {
 		
 		try {
 			List<String> source = loadFromFile(args);
+			if (source == null)
+			{
+				return;
+			}
 			source = Preprocessor.removeComments(source);
 			source = Preprocessor.removeStrings(source);
 			source = Preprocessor.removeImports(source);
@@ -33,7 +37,7 @@ public class Main {
 			
 			FCompilationUnit unit = new FCompilationUnit();
 			unit.setWords(words);
-			unit.setName("DekodovaniPasky");
+			unit.setName(args[0]);
 			unit.parse();
 			
 			CompilationUnitWriter wr = new CompilationUnitWriter();
@@ -48,11 +52,11 @@ public class Main {
 	}
 	
 	private static List<String> loadFromFile(String[] args) throws IOException {
-		
-		//String path = "/home/jpouba/Downloads/PilsProg/DekodovaniPasky.java";
-        //String path = "C:\\fjp-2\\PilsProg\\DekodovaniPasky.java";
-
-		//String path = "D:\\STAZENO\\PilsProg\\PilsProg\\DekodovaniPasky.java";
+		if (args.length == 0)
+		{
+			System.out.println("You must specify the file you want to translate as a parameter.");
+			return null;
+		}
 		String path = args[0];
 		return FileUtils.readLines(new File(path));
 	}

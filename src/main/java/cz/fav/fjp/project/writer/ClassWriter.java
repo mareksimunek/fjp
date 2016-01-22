@@ -9,7 +9,7 @@ public class ClassWriter extends DefaultWriter<FClass> {
 	@Override
 	public void transform(FClass obj) throws Exception {
 		
-		Logger.log("Writting class: " + obj.getName(), 1);
+		Logger.log("Writing class: " + obj.getName(), 1);
 		
 		obj.getAttributes().forEach( a -> {
 			if (a.getVariable().getType().getValue().equals("Scanner")) return;

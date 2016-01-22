@@ -9,7 +9,7 @@ public class ExpressionWriter extends DefaultWriter<FExpression> {
 	@Override
 	public void transform(FExpression obj) throws Exception {
 		
-		Logger.log("Writting expression: " + obj.getWords(), 1);
+		Logger.log("Writing expression: " + obj.getWords(), 1);
 
 		for (FExpressionSide fExpressionSide : obj.getfExpSideList()) {
 			new ExpressionSideWriter().transform(fExpressionSide);

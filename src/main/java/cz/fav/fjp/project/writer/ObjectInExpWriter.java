@@ -11,7 +11,7 @@ public class ObjectInExpWriter extends DefaultWriter<FObjectInExp> {
 	@Override
 	public void transform(FObjectInExp obj) throws Exception {
 
-		Logger.log("Writting object in expression: " + obj.getName(), 1);
+		Logger.log("Writing object in expression: " + obj.getName(), 1);
 
 		if(obj.isNewInitilization()){
 			objectInitialization(obj);

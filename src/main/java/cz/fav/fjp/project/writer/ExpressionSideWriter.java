@@ -12,7 +12,7 @@ public class ExpressionSideWriter extends DefaultWriter<FExpressionSide> {
 	@Override
 	public void transform(FExpressionSide obj) throws Exception {
 
-		Logger.log("Writting expression side: " + obj.getWords(), 1);
+		Logger.log("Writing expression side: " + obj.getWords(), 1);
 
 		if(obj.getObjectList().isEmpty()){
 
